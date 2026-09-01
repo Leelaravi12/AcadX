@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,283 +12,1133 @@
 
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="logo">
-            <span class="logo-box">A</span>
-            <span class="logo-name">AcadX</span>
+<header class="navbar">
+
+    <div class="logo">
+        <span class="logo-box">A</span>
+        <span class="logo-name">AcadX</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+
+        <a href="dashboard.html" class="active">
+            Dashboard
+        </a>
+
+        <a href="student-profile.html">
+            Profile
+        </a>
+
+        <a href="skills.html">
+            Skills
+        </a>
+
+        <a href="opportunities.html">
+            Opportunities
+        </a>
+    </nav>
+
+    <button
+        class="profile-button"
+        onclick="window.location.href='student-profile.html'">
+
+        My Profile
+
+    </button>
+
+</header>
+
+
+<main class="dashboard">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome-section">
+
+        <div>
+
+            <p class="small-heading">
+                STUDENT DASHBOARD
+            </p>
+
+            <h1>
+                Welcome back,
+                <span id="studentName">Student!</span>
+            </h1>
+
+            <p class="welcome-text">
+                Track your skills, complete assessments,
+                discover your skill gaps and find opportunities
+                that match your career goals.
+            </p>
+
         </div>
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="dashboard.html" class="active">Dashboard</a>
-            <a href="#">Skills</a>
-            <a href="#">Opportunities</a>
-        </nav>
 
-        <button class="profile-button">My Profile</button>
-    </header>
+        <div class="career-card">
+
+            <p>
+                Career Goal
+            </p>
+
+            <h3 id="careerGoal">
+                Frontend Developer
+            </h3>
+
+            <span id="careerStatus">
+                ● Assessment not completed
+            </span>
+
+        </div>
+
+    </section>
 
 
-    <!-- DASHBOARD -->
-    <main class="dashboard">
 
-        <!-- WELCOME -->
-        <section class="welcome-section">
-            <div>
-                <p class="small-heading">STUDENT DASHBOARD</p>
+    <!-- QUICK STATS -->
 
-                <h1>
-                    Welcome back, <span>Student!</span>
-                </h1>
+    <section class="stats-grid">
 
-                <p class="welcome-text">
-                    Track your skills, discover your gaps and find
-                    opportunities that match your career goals.
-                </p>
+
+        <!-- OVERALL SCORE -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ★
             </div>
 
-            <div class="career-card">
-                <p>Career Goal</p>
-                <h3>Frontend Developer</h3>
-                <span>● Exploring your career path</span>
-            </div>
-        </section>
+            <p>
+                Overall Skill Score
+            </p>
+
+            <h2 id="skillScore">
+                —
+            </h2>
+
+            <span id="scoreMessage">
+                Complete all assessments
+            </span>
+
+        </div>
 
 
-        <!-- QUICK STATS -->
-        <section class="stats-grid">
 
-            <div class="stat-card">
-                <div class="stat-icon">★</div>
-                <p>Overall Skill Score</p>
-                <h2>78%</h2>
-                <span class="positive">↑ 8% this month</span>
-            </div>
+        <!-- ASSESSMENT STATUS -->
 
-            <div class="stat-card">
-                <div class="stat-icon">✓</div>
-                <p>Skills Assessed</p>
-                <h2>12</h2>
-                <span>Across 4 categories</span>
-            </div>
+        <div class="stat-card">
 
-            <div class="stat-card">
-                <div class="stat-icon">!</div>
-                <p>Skills to Improve</p>
-                <h2>4</h2>
-                <span>Based on your career goal</span>
+            <div class="stat-icon">
+                ✓
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">↗</div>
-                <p>Opportunities</p>
-                <h2>8</h2>
-                <span>Matching your profile</span>
+            <p>
+                Assessments Completed
+            </p>
+
+            <h2 id="assessmentStatus">
+                0/4
+            </h2>
+
+            <span id="assessmentMessage">
+                Complete your assessments
+            </span>
+
+        </div>
+
+
+
+        <!-- SKILLS TO IMPROVE -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                !
             </div>
 
-        </section>
+            <p>
+                Skills to Improve
+            </p>
 
+            <h2 id="skillsToImprove">
+                —
+            </h2>
 
-        <!-- MAIN CONTENT -->
-        <section class="dashboard-grid">
+            <span>
+                Based on your assessment
+            </span>
 
-            <!-- SKILLS -->
-            <div class="dashboard-card skills-card">
+        </div>
 
-                <div class="card-heading">
-                    <div>
-                        <p class="small-heading">YOUR SKILLS</p>
-                        <h2>Skill Overview</h2>
-                    </div>
-
-                    <button class="text-button">View All →</button>
-                </div>
-
-
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span>HTML</span>
-                        <strong>90%</strong>
-                    </div>
-
-                    <div class="progress">
-                        <div class="progress-fill" style="width: 90%;"></div>
-                    </div>
-                </div>
-
-
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span>CSS</span>
-                        <strong>82%</strong>
-                    </div>
-
-                    <div class="progress">
-                        <div class="progress-fill" style="width: 82%;"></div>
-                    </div>
-                </div>
-
-
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span>JavaScript</span>
-                        <strong>68%</strong>
-                    </div>
-
-                    <div class="progress">
-                        <div class="progress-fill" style="width: 68%;"></div>
-                    </div>
-                </div>
-
-
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span>Git & GitHub</span>
-                        <strong>55%</strong>
-                    </div>
-
-                    <div class="progress">
-                        <div class="progress-fill" style="width: 55%;"></div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <!-- SKILL GAP -->
-            <div class="dashboard-card gap-card">
-
-                <div class="card-heading">
-                    <div>
-                        <p class="small-heading">CAREER READINESS</p>
-                        <h2>Your Skill Gap</h2>
-                    </div>
-                </div>
-
-                <div class="readiness">
-                    <div class="readiness-circle">
-                        <span>72%</span>
-                    </div>
-
-                    <div>
-                        <h3>Good progress!</h3>
-
-                        <p>
-                            You are building a strong foundation
-                            for your selected career.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="gap-message">
-                    <strong>Focus next on:</strong>
-
-                    <div class="tag-container">
-                        <span>React</span>
-                        <span>Git</span>
-                        <span>JavaScript</span>
-                    </div>
-                </div>
-
-                <button class="primary-button">
-                    Explore Skill Gap
-                </button>
-
-            </div>
-
-        </section>
 
 
         <!-- OPPORTUNITIES -->
-        <section class="dashboard-card opportunities-card">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ↗
+            </div>
+
+            <p>
+                Opportunities
+            </p>
+
+            <h2>
+                3
+            </h2>
+
+            <span>
+                Matching your profile
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ASSESSMENT NOTICE -->
+
+    <section
+        class="dashboard-card"
+        id="assessmentNotice">
+
+        <div class="card-heading">
+
+            <div>
+
+                <p class="small-heading">
+                    GET STARTED
+                </p>
+
+                <h2>
+                    Complete your skill assessments
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <p id="assessmentNoticeText">
+
+            Take all four technical skill assessments
+            to generate your personalized skill gap analysis.
+
+        </p>
+
+
+        <button
+            class="primary-button"
+            onclick="window.location.href='skills.html'">
+
+            Take Skill Assessment →
+
+        </button>
+
+    </section>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- SKILLS -->
+
+        <div class="dashboard-card skills-card">
 
             <div class="card-heading">
+
                 <div>
-                    <p class="small-heading">DISCOVER</p>
-                    <h2>Recommended Opportunities</h2>
+
+                    <p class="small-heading">
+                        YOUR SKILLS
+                    </p>
+
+                    <h2>
+                        Skill Overview
+                    </h2>
+
                 </div>
 
-                <button class="text-button">
+
+                <button
+                    class="text-button"
+                    onclick="window.location.href='skills.html'">
+
                     View All →
+
                 </button>
+
             </div>
 
 
-            <div class="opportunity-grid">
 
-                <div class="opportunity">
-                    <span class="opportunity-label">INTERNSHIP</span>
+            <!-- HTML & CSS -->
 
-                    <h3>Frontend Development Intern</h3>
+            <div class="skill-item">
 
-                    <p>Web Development • Remote</p>
+                <div class="skill-info">
 
-                    <div class="opportunity-skills">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                    </div>
+                    <span>
+                        HTML & CSS
+                    </span>
 
-                    <div class="match">
-                        <strong>86% Match</strong>
-                        <button>View Opportunity</button>
-                    </div>
+                    <strong id="htmlcssScore">
+                        —
+                    </strong>
+
                 </div>
 
+                <div class="progress">
 
-                <div class="opportunity">
-                    <span class="opportunity-label">INTERNSHIP</span>
+                    <div
+                        class="progress-fill"
+                        id="htmlcssProgress"
+                        style="width:0%;">
 
-                    <h3>UI/UX Design Intern</h3>
-
-                    <p>Product Design • Bengaluru</p>
-
-                    <div class="opportunity-skills">
-                        <span>UI Design</span>
-                        <span>Figma</span>
                     </div>
 
-                    <div class="match">
-                        <strong>74% Match</strong>
-                        <button>View Opportunity</button>
-                    </div>
-                </div>
-
-
-                <div class="opportunity">
-                    <span class="opportunity-label">PROJECT</span>
-
-                    <h3>Web Development Project</h3>
-
-                    <p>Student Project • Collaborative</p>
-
-                    <div class="opportunity-skills">
-                        <span>HTML</span>
-                        <span>JavaScript</span>
-                    </div>
-
-                    <div class="match">
-                        <strong>81% Match</strong>
-                        <button>View Opportunity</button>
-                    </div>
                 </div>
 
             </div>
 
-        </section>
-
-    </main>
 
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <strong>AcadX</strong>
-        <span>Connecting academia with opportunity.</span>
-    </footer>
+            <!-- JAVASCRIPT -->
+
+            <div class="skill-item">
+
+                <div class="skill-info">
+
+                    <span>
+                        JavaScript
+                    </span>
+
+                    <strong id="javascriptScore">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-fill"
+                        id="javascriptProgress"
+                        style="width:0%;">
+
+                    </div>
+
+                </div>
+
+            </div>
 
 
-    <script src="script.js"></script>
+
+            <!-- PYTHON -->
+
+            <div class="skill-item">
+
+                <div class="skill-info">
+
+                    <span>
+                        Python
+                    </span>
+
+                    <strong id="pythonScore">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-fill"
+                        id="pythonProgress"
+                        style="width:0%;">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- C PROGRAMMING -->
+
+            <div class="skill-item">
+
+                <div class="skill-info">
+
+                    <span>
+                        C Programming
+                    </span>
+
+                    <strong id="cScore">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-fill"
+                        id="cProgress"
+                        style="width:0%;">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SKILL GAP -->
+
+        <div class="dashboard-card gap-card">
+
+            <div class="card-heading">
+
+                <div>
+
+                    <p class="small-heading">
+                        CAREER READINESS
+                    </p>
+
+                    <h2>
+                        Your Skill Gap
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="readiness">
+
+                <div class="readiness-circle">
+
+                    <span id="readinessScore">
+                        —
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <h3 id="readinessTitle">
+                        Assessment required
+                    </h3>
+
+                    <p id="readinessText">
+
+                        Complete all four assessments
+                        to calculate your career readiness.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="gap-message">
+
+                <strong>
+                    Next step:
+                </strong>
+
+                <div
+                    class="tag-container"
+                    id="gapTags">
+
+                    <span>
+                        HTML & CSS
+                    </span>
+
+                    <span>
+                        JavaScript
+                    </span>
+
+                    <span>
+                        Python
+                    </span>
+
+                    <span>
+                        C Programming
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                id="skillGapButton"
+                class="primary-button"
+                disabled
+                style="opacity:0.6;">
+
+                Complete All Assessments
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- OPPORTUNITIES -->
+
+    <section class="dashboard-card opportunities-card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <p class="small-heading">
+                    DISCOVER
+                </p>
+
+                <h2>
+                    Recommended Opportunities
+                </h2>
+
+            </div>
+
+
+            <button
+                class="text-button"
+                onclick="window.location.href='opportunities.html'">
+
+                View All →
+
+            </button>
+
+        </div>
+
+
+
+        <div class="opportunity-grid">
+
+
+            <!-- OPPORTUNITY 1 -->
+
+            <div class="opportunity">
+
+                <span class="opportunity-label">
+                    INTERNSHIP
+                </span>
+
+                <h3>
+                    Frontend Development Intern
+                </h3>
+
+                <p>
+                    Web Development • Remote
+                </p>
+
+                <div class="opportunity-skills">
+
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+
+                </div>
+
+
+                <div class="match">
+
+                    <strong>
+                        86% Match
+                    </strong>
+
+                    <button
+                        onclick="window.location.href='opportunities.html'">
+
+                        View Opportunity
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OPPORTUNITY 2 -->
+
+            <div class="opportunity">
+
+                <span class="opportunity-label">
+                    INTERNSHIP
+                </span>
+
+                <h3>
+                    UI/UX Design Intern
+                </h3>
+
+                <p>
+                    Product Design • Bengaluru
+                </p>
+
+                <div class="opportunity-skills">
+
+                    <span>UI Design</span>
+                    <span>Figma</span>
+
+                </div>
+
+
+                <div class="match">
+
+                    <strong>
+                        74% Match
+                    </strong>
+
+                    <button
+                        onclick="window.location.href='opportunities.html'">
+
+                        View Opportunity
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OPPORTUNITY 3 -->
+
+            <div class="opportunity">
+
+                <span class="opportunity-label">
+                    PROJECT
+                </span>
+
+                <h3>
+                    Web Development Project
+                </h3>
+
+                <p>
+                    Student Project • Collaborative
+                </p>
+
+                <div class="opportunity-skills">
+
+                    <span>HTML</span>
+                    <span>JavaScript</span>
+
+                </div>
+
+
+                <div class="match">
+
+                    <strong>
+                        81% Match
+                    </strong>
+
+                    <button
+                        onclick="window.location.href='opportunities.html'">
+
+                        View Opportunity
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<footer class="footer">
+
+    <strong>
+        AcadX
+    </strong>
+
+    <span>
+        Connecting academia with opportunity.
+    </span>
+
+</footer>
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* ================================
+       PROFILE DATA
+    ================================= */
+
+    const savedProfile =
+        localStorage.getItem("acadxProfile");
+
+    if (savedProfile) {
+
+        try {
+
+            const profile =
+                JSON.parse(savedProfile);
+
+            if (profile.name) {
+
+                document.getElementById(
+                    "studentName"
+                ).textContent =
+                    profile.name + "!";
+
+            }
+
+            if (profile.careerGoal) {
+
+                document.getElementById(
+                    "careerGoal"
+                ).textContent =
+                    profile.careerGoal;
+
+            }
+
+        } catch (error) {
+
+            console.log(
+                "Profile data could not be loaded."
+            );
+
+        }
+
+    }
+
+
+
+    /* ================================
+       ASSESSMENT DATA
+    ================================= */
+
+    const skills = [
+        "htmlcss",
+        "javascript",
+        "python",
+        "c"
+    ];
+
+
+    let completed = 0;
+
+    let totalScore = 0;
+
+    let scores = {};
+
+
+
+    skills.forEach(function (skill) {
+
+        const score =
+            localStorage.getItem(
+                "acadx_" + skill + "_score"
+            );
+
+
+        if (score !== null) {
+
+            const numericScore =
+                Number(score);
+
+            scores[skill] =
+                numericScore;
+
+            completed++;
+
+            totalScore +=
+                numericScore;
+
+        }
+
+    });
+
+
+
+    /* ================================
+       INDIVIDUAL SKILLS
+    ================================= */
+
+    function updateSkill(
+        scoreId,
+        progressId,
+        score
+    ) {
+
+        const scoreElement =
+            document.getElementById(scoreId);
+
+        const progressElement =
+            document.getElementById(progressId);
+
+
+        if (score !== undefined) {
+
+            scoreElement.textContent =
+                score + "%";
+
+            progressElement.style.width =
+                score + "%";
+
+        } else {
+
+            scoreElement.textContent =
+                "—";
+
+            progressElement.style.width =
+                "0%";
+
+        }
+
+    }
+
+
+    updateSkill(
+        "htmlcssScore",
+        "htmlcssProgress",
+        scores.htmlcss
+    );
+
+
+    updateSkill(
+        "javascriptScore",
+        "javascriptProgress",
+        scores.javascript
+    );
+
+
+    updateSkill(
+        "pythonScore",
+        "pythonProgress",
+        scores.python
+    );
+
+
+    updateSkill(
+        "cScore",
+        "cProgress",
+        scores.c
+    );
+
+
+
+    /* ================================
+       OVERALL SCORE
+    ================================= */
+
+    const skillScore =
+        document.getElementById(
+            "skillScore"
+        );
+
+
+    const scoreMessage =
+        document.getElementById(
+            "scoreMessage"
+        );
+
+
+    if (completed > 0) {
+
+        const average =
+            Math.round(
+                totalScore / completed
+            );
+
+        skillScore.textContent =
+            average + "%";
+
+        scoreMessage.textContent =
+            completed === 4
+                ? "Based on all four assessments"
+                : "Based on completed assessments";
+
+    }
+
+
+
+    /* ================================
+       ASSESSMENT STATUS
+    ================================= */
+
+    const assessmentStatus =
+        document.getElementById(
+            "assessmentStatus"
+        );
+
+
+    const assessmentMessage =
+        document.getElementById(
+            "assessmentMessage"
+        );
+
+
+    assessmentStatus.textContent =
+        completed + "/4";
+
+
+    if (completed === 0) {
+
+        assessmentMessage.textContent =
+            "Not completed";
+
+    } else if (completed < 4) {
+
+        assessmentMessage.textContent =
+            "Keep going";
+
+    } else {
+
+        assessmentMessage.textContent =
+            "All completed";
+
+    }
+
+
+
+    /* ================================
+       CAREER STATUS
+    ================================= */
+
+    const careerStatus =
+        document.getElementById(
+            "careerStatus"
+        );
+
+
+    if (completed === 4) {
+
+        careerStatus.textContent =
+            "● All assessments completed";
+
+    } else if (completed > 0) {
+
+        careerStatus.textContent =
+            "● Assessment in progress";
+
+    } else {
+
+        careerStatus.textContent =
+            "● Assessment not completed";
+
+    }
+
+
+
+    /* ================================
+       SKILLS TO IMPROVE
+    ================================= */
+
+    const skillsToImprove =
+        document.getElementById(
+            "skillsToImprove"
+        );
+
+
+    if (completed === 0) {
+
+        skillsToImprove.textContent =
+            "—";
+
+    } else {
+
+        let improveCount = 0;
+
+
+        skills.forEach(function (skill) {
+
+            if (
+                scores[skill] !== undefined &&
+                scores[skill] < 70
+            ) {
+
+                improveCount++;
+
+            }
+
+        });
+
+
+        skillsToImprove.textContent =
+            improveCount;
+
+    }
+
+
+
+    /* ================================
+       CAREER READINESS
+    ================================= */
+
+    const readinessScore =
+        document.getElementById(
+            "readinessScore"
+        );
+
+
+    const readinessTitle =
+        document.getElementById(
+            "readinessTitle"
+        );
+
+
+    const readinessText =
+        document.getElementById(
+            "readinessText"
+        );
+
+
+    if (completed === 4) {
+
+        const average =
+            Math.round(
+                totalScore / 4
+            );
+
+
+        readinessScore.textContent =
+            average + "%";
+
+
+        if (average >= 80) {
+
+            readinessTitle.textContent =
+                "Excellent progress!";
+
+            readinessText.textContent =
+                "You have built a strong foundation for your selected career.";
+
+        } else if (average >= 60) {
+
+            readinessTitle.textContent =
+                "Good progress!";
+
+            readinessText.textContent =
+                "You have a good foundation, with a few areas that need improvement.";
+
+        } else {
+
+            readinessTitle.textContent =
+                "Keep improving!";
+
+            readinessText.textContent =
+                "Your assessment shows several areas where focused practice can help.";
+
+        }
+
+    }
+
+
+
+    /* ================================
+       ASSESSMENT NOTICE
+    ================================= */
+
+    const assessmentNotice =
+        document.getElementById(
+            "assessmentNotice"
+        );
+
+
+    const assessmentNoticeText =
+        document.getElementById(
+            "assessmentNoticeText"
+        );
+
+
+    if (completed === 4) {
+
+        assessmentNotice.style.display =
+            "none";
+
+    } else {
+
+        assessmentNotice.style.display =
+            "block";
+
+        assessmentNoticeText.textContent =
+            "Complete all four technical skill assessments to generate your personalized skill gap analysis.";
+
+    }
+
+
+
+    /* ================================
+       SKILL GAP BUTTON
+    ================================= */
+
+    const skillGapButton =
+        document.getElementById(
+            "skillGapButton"
+        );
+
+
+    if (completed === 4) {
+
+        skillGapButton.disabled =
+            false;
+
+        skillGapButton.style.opacity =
+            "1";
+
+        skillGapButton.textContent =
+            "Explore Skill Gap →";
+
+        skillGapButton.onclick =
+            function () {
+
+                window.location.href =
+                    "skill-gap.html";
+
+            };
+
+    } else {
+
+        skillGapButton.disabled =
+            true;
+
+        skillGapButton.style.opacity =
+            "0.6";
+
+        skillGapButton.textContent =
+            "Complete All Assessments";
+
+    }
+
+});
+
+</script>
 
 </body>
+
 </html>
