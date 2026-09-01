@@ -1,15 +1,12 @@
-
 // ==========================================
 // INDUSTRY PORTAL MVP
 // ==========================================
 
-
-// Store skills for the role currently being created
 let currentSkills = [];
 
-
-// Store published roles
-let roles = JSON.parse(localStorage.getItem("industryRoles")) || [];
+// Published roles for this browser session.
+// Refreshing keeps them; closing the browser/tab clears them.
+let roles = JSON.parse(sessionStorage.getItem("industryRoles") || "[]");
 
 
 // ==========================================
@@ -17,13 +14,13 @@ let roles = JSON.parse(localStorage.getItem("industryRoles")) || [];
 // ==========================================
 
 function openRoleForm() {
-
     const section = document.getElementById("roleFormSection");
 
-    section.scrollIntoView({
-        behavior: "smooth"
-    });
-
+    if (section) {
+        section.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
 }
 
 
@@ -32,45 +29,29 @@ function openRoleForm() {
 // ==========================================
 
 function addSkill() {
-
     const skillInput = document.getElementById("skillInput");
-
     const skillLevel = document.getElementById("skillLevel");
+
+    if (!skillInput || !skillLevel) {
+        alert("Skill input or skill level field was not found.");
+        return;
+    }
 
     const skillName = skillInput.value.trim();
 
-
-    // Don't allow empty skills
-
     if (skillName === "") {
-
         alert("Please enter a skill.");
-
         return;
-
     }
 
-
-    // Add skill to array
-
     currentSkills.push({
-
         name: skillName,
-
         level: skillLevel.value
-
     });
-
-
-    // Clear input
 
     skillInput.value = "";
 
-
-    // Update screen
-
     displaySkills();
-
 }
 
 
@@ -79,12 +60,11 @@ function addSkill() {
 // ==========================================
 
 function displaySkills() {
-
     const skillList = document.getElementById("skillList");
 
+    if (!skillList) return;
 
     if (currentSkills.length === 0) {
-
         skillList.innerHTML = `
             <p class="empty-message">
                 No skills added yet.
@@ -92,35 +72,24 @@ function displaySkills() {
         `;
 
         updateCounts();
-
         return;
-
     }
-
 
     skillList.innerHTML = "";
 
-
     currentSkills.forEach((skill, index) => {
-
         const skillItem = document.createElement("div");
 
         skillItem.className = "skill-item";
 
-
         skillItem.innerHTML = `
-
             <div>
-
                 <span class="skill-name">
                     ${skill.name}
                 </span>
-
             </div>
 
-
             <div>
-
                 <span class="skill-level">
                     ${skill.level}
                 </span>
@@ -138,19 +107,13 @@ function displaySkills() {
                 >
                     Remove
                 </button>
-
             </div>
-
         `;
 
-
         skillList.appendChild(skillItem);
-
     });
 
-
     updateCounts();
-
 }
 
 
@@ -159,11 +122,9 @@ function displaySkills() {
 // ==========================================
 
 function removeSkill(index) {
-
     currentSkills.splice(index, 1);
 
     displaySkills();
-
 }
 
 
@@ -171,94 +132,63 @@ function removeSkill(index) {
 // PUBLISH OPPORTUNITY
 // ==========================================
 
-document
-    .getElementById("roleForm")
-    .addEventListener("submit", function(event) {
-
-
-        // Prevent page refresh
-
+function publishOpportunity(event) {
+    if (event) {
         event.preventDefault();
+    }
 
+    if (currentSkills.length === 0) {
+        alert("Please add at least one required skill.");
+        return;
+    }
 
-        // Check skills
+    const role = {
+        id: Date.now(),
 
-        if (currentSkills.length === 0) {
+        title:
+            document.getElementById("roleTitle").value.trim(),
 
-            alert("Please add at least one required skill.");
+        type:
+            document.getElementById("roleType").value,
 
-            return;
+        location:
+            document.getElementById("roleLocation").value.trim(),
 
-        }
+        duration:
+            document.getElementById("roleDuration").value.trim(),
 
+        description:
+            document.getElementById("roleDescription").value.trim(),
 
-        // Get role information
+        skills:
+            [...currentSkills],
 
-        const role = {
+        status:
+            "Published"
+    };
 
-            id: Date.now(),
+    roles.push(role);
 
-            title:
-                document.getElementById("roleTitle").value,
+    sessionStorage.setItem(
+        "industryRoles",
+        JSON.stringify(roles)
+    );
 
-            type:
-                document.getElementById("roleType").value,
+    displayRoles();
 
-            location:
-                document.getElementById("roleLocation").value,
+    clearForm();
 
-            duration:
-                document.getElementById("roleDuration").value,
+    alert("Opportunity published successfully!");
 
-            description:
-                document.getElementById("roleDescription").value,
+    const rolesSection =
+        document.getElementById("roles");
 
-            skills:
-                [...currentSkills],
-
-            status:
-                "Published"
-
-        };
-
-
-        // Add role
-
-        roles.push(role);
-
-
-        // Save to browser
-
-        localStorage.setItem(
-            "industryRoles",
-            JSON.stringify(roles)
-        );
-
-
-        // Show roles
-
-        displayRoles();
-
-
-        // Clear form
-
-        clearForm();
-
-
-        // Show success message
-
-        alert("Opportunity published successfully!");
-
-
-        // Scroll to roles
-
-        document
-            .getElementById("roles")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
-
-});
+    if (rolesSection) {
+        rolesSection.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+}
 
 
 // ==========================================
@@ -266,15 +196,13 @@ document
 // ==========================================
 
 function displayRoles() {
-
     const roleList =
         document.getElementById("roleList");
 
+    if (!roleList) return;
 
     if (roles.length === 0) {
-
         roleList.innerHTML = `
-
             <div class="empty-role">
 
                 <h3>
@@ -287,30 +215,22 @@ function displayRoles() {
                 </p>
 
             </div>
-
         `;
 
         updateCounts();
+        displaySkillMatch();
 
         return;
-
     }
-
 
     roleList.innerHTML = "";
 
-
     roles.forEach(role => {
-
 
         const roleCard =
             document.createElement("div");
 
-
         roleCard.className = "role-card";
-
-
-        // Create skill tags
 
         const skillTags =
             role.skills
@@ -322,13 +242,11 @@ function displayRoles() {
                 `)
                 .join("");
 
-
         roleCard.innerHTML = `
 
             <div class="role-icon">
                 ${getInitials(role.title)}
             </div>
-
 
             <div class="role-info">
 
@@ -344,15 +262,11 @@ function displayRoles() {
                     ${role.duration}
                 </p>
 
-
                 <div class="role-skills">
-
                     ${skillTags}
-
                 </div>
 
             </div>
-
 
             <div class="published">
                 ✓ Published
@@ -360,14 +274,12 @@ function displayRoles() {
 
         `;
 
-
         roleList.appendChild(roleCard);
-
     });
-
 
     updateCounts();
 
+    displaySkillMatch();
 }
 
 
@@ -377,22 +289,26 @@ function displayRoles() {
 
 function getInitials(title) {
 
-    const words = title.split(" ");
+    const words =
+        title
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean);
+
+    if (words.length === 0) {
+        return "OP";
+    }
 
     if (words.length === 1) {
-
         return words[0]
             .substring(0, 2)
             .toUpperCase();
-
     }
-
 
     return (
         words[0][0] +
         words[1][0]
     ).toUpperCase();
-
 }
 
 
@@ -402,12 +318,16 @@ function getInitials(title) {
 
 function clearForm() {
 
-    document.getElementById("roleForm").reset();
+    const form =
+        document.getElementById("roleForm");
+
+    if (form) {
+        form.reset();
+    }
 
     currentSkills = [];
 
     displaySkills();
-
 }
 
 
@@ -424,53 +344,56 @@ function updateCounts() {
             0
         );
 
-
     const publishedRoles =
         roles.length;
 
+    const activeRoles =
+        document.getElementById("activeRoles");
 
-    // Main dashboard
+    const totalSkillsBox =
+        document.getElementById("totalSkills");
 
-    document.getElementById("activeRoles")
-        .textContent = publishedRoles;
+    const opportunityCount =
+        document.getElementById("opportunityCount");
 
+    const skillCount =
+        document.getElementById("skillCount");
 
-    document.getElementById("totalSkills")
-        .textContent = totalSkills;
+    const roleCount =
+        document.getElementById("roleCount");
 
+    const draftCount =
+        document.getElementById("draftCount");
 
-    document.getElementById("opportunityCount")
-        .textContent = publishedRoles;
+    if (activeRoles) {
+        activeRoles.textContent =
+            publishedRoles;
+    }
 
+    if (totalSkillsBox) {
+        totalSkillsBox.textContent =
+            totalSkills;
+    }
 
-    // Right summary card
+    if (opportunityCount) {
+        opportunityCount.textContent =
+            publishedRoles;
+    }
 
-    document.getElementById("skillCount")
-        .textContent = totalSkills;
+    if (skillCount) {
+        skillCount.textContent =
+            totalSkills;
+    }
 
+    if (roleCount) {
+        roleCount.textContent =
+            publishedRoles;
+    }
 
-    document.getElementById("roleCount")
-        .textContent = publishedRoles;
-
-
-    document.getElementById("draftCount")
-        .textContent = 0;
-
+    if (draftCount) {
+        draftCount.textContent = 0;
+    }
 }
-
-
-// ==========================================
-// LOAD SAVED DATA WHEN PAGE OPENS
-// ==========================================
-
-displaySkills();
-
-displayRoles();
-
-updateCounts();
-
-
-
 
 
 // ==========================================
@@ -478,32 +401,80 @@ updateCounts();
 // ==========================================
 
 const demoStudentSkills = {
+
     "Python": "Advanced",
+
     "Data Structures": "Beginner",
-    "SQL": "Intermediate"
+
+    "DSA": "Beginner",
+
+    "SQL": "Intermediate",
+
+    "Java": "Intermediate"
+
 };
 
 
 // ==========================================
-// DISPLAY SKILL MATCH
+// NORMALIZE SKILL NAMES
+// ==========================================
+
+function normalizeSkillName(name) {
+
+    const value =
+        name.trim().toLowerCase();
+
+    if (
+        value === "dsa" ||
+        value === "data structures" ||
+        value === "data structure"
+    ) {
+        return "dsa";
+    }
+
+    return value;
+}
+
+
+// ==========================================
+// DISPLAY SKILL MATCH FOR ALL ROLES
 // ==========================================
 
 function displaySkillMatch() {
 
     const industryBox =
-        document.getElementById("industryRequirements");
+        document.getElementById(
+            "industryRequirements"
+        );
 
     const studentBox =
-        document.getElementById("studentSkills");
+        document.getElementById(
+            "studentSkills"
+        );
 
     const scoreBox =
-        document.getElementById("matchScore");
+        document.getElementById(
+            "matchScore"
+        );
 
     const gapBox =
-        document.getElementById("gapMessage");
+        document.getElementById(
+            "gapMessage"
+        );
 
+    const progressBar =
+        document.getElementById(
+            "matchProgressBar"
+        );
 
-    // Get the latest published role
+    if (
+        !industryBox ||
+        !studentBox ||
+        !scoreBox ||
+        !gapBox
+    ) {
+        return;
+    }
 
     if (roles.length === 0) {
 
@@ -513,141 +484,198 @@ function displaySkillMatch() {
         studentBox.innerHTML =
             "<p class='empty-message'>No student profile available.</p>";
 
+        scoreBox.textContent = "0%";
+
+        if (progressBar) {
+            progressBar.style.width = "0%";
+        }
+
+        gapBox.textContent = "";
+
         return;
     }
 
-
-    const role = roles[roles.length - 1];
-
-
-    // Clear old content
-
     industryBox.innerHTML = "";
+
     studentBox.innerHTML = "";
 
+    let totalRequired = 0;
 
-    let matchedSkills = 0;
-    let skillGaps = [];
+    let totalMatched = 0;
 
-
-    // Compare every required skill
-
-    role.skills.forEach(skill => {
-
-        const studentLevel =
-            demoStudentSkills[skill.name];
+    let allSkillGaps = [];
 
 
-        // Industry requirement
+    // Check EVERY published opportunity
 
-        const industryItem =
-            document.createElement("div");
+    roles.forEach(role => {
 
-        industryItem.className = "match-item";
+        const industryHeading =
+            document.createElement("h4");
 
-        industryItem.innerHTML = `
-            <span class="match-item-name">
-                ${skill.name}
-            </span>
+        industryHeading.textContent =
+            role.title;
 
-            <span class="match-item-level">
-                Required: ${skill.level}
-            </span>
-        `;
-
-        industryBox.appendChild(industryItem);
+        industryBox.appendChild(
+            industryHeading
+        );
 
 
-        // Student skill result
+        const studentHeading =
+            document.createElement("h4");
 
-        const studentItem =
-            document.createElement("div");
+        studentHeading.textContent =
+            role.title;
 
-        studentItem.className = "match-item";
-
-
-        if (studentLevel) {
-
-            const meetsRequirement =
-                getLevelValue(studentLevel)
-                >=
-                getLevelValue(skill.level);
+        studentBox.appendChild(
+            studentHeading
+        );
 
 
-            if (meetsRequirement) {
+        role.skills.forEach(skill => {
 
-                matchedSkills++;
+            totalRequired++;
 
-                studentItem.innerHTML = `
-                    <span class="match-item-name">
-                        ${skill.name}
-                    </span>
 
-                    <span class="match-status good">
-                        ✓ ${studentLevel}
-                    </span>
-                `;
+            const studentLevel =
+                findStudentSkillLevel(
+                    skill.name
+                );
+
+
+            // Industry requirement
+
+            const industryItem =
+                document.createElement("div");
+
+            industryItem.className =
+                "match-item";
+
+            industryItem.innerHTML = `
+
+                <span class="match-item-name">
+                    ${skill.name}
+                </span>
+
+                <span class="match-item-level">
+                    Required: ${skill.level}
+                </span>
+
+            `;
+
+            industryBox.appendChild(
+                industryItem
+            );
+
+
+            // Student result
+
+            const studentItem =
+                document.createElement("div");
+
+            studentItem.className =
+                "match-item";
+
+
+            if (studentLevel) {
+
+                const meetsRequirement =
+                    getLevelValue(studentLevel)
+                    >=
+                    getLevelValue(skill.level);
+
+
+                if (meetsRequirement) {
+
+                    totalMatched++;
+
+                    studentItem.innerHTML = `
+
+                        <span class="match-item-name">
+                            ${skill.name}
+                        </span>
+
+                        <span class="match-status good">
+                            ✓ ${studentLevel}
+                        </span>
+
+                    `;
+
+                } else {
+
+                    allSkillGaps.push(
+                        `${role.title}: ${skill.name}`
+                    );
+
+                    studentItem.innerHTML = `
+
+                        <span class="match-item-name">
+                            ${skill.name}
+                        </span>
+
+                        <span class="match-status gap">
+                            ⚠ ${studentLevel}
+                        </span>
+
+                    `;
+                }
 
             } else {
 
-                skillGaps.push(skill.name);
+                allSkillGaps.push(
+                    `${role.title}: ${skill.name}`
+                );
 
                 studentItem.innerHTML = `
+
                     <span class="match-item-name">
                         ${skill.name}
                     </span>
 
                     <span class="match-status gap">
-                        ⚠ ${studentLevel}
+                        ⚠ Not available
                     </span>
-                `;
 
+                `;
             }
 
-        } else {
+            studentBox.appendChild(
+                studentItem
+            );
 
-            skillGaps.push(skill.name);
-
-            studentItem.innerHTML = `
-                <span class="match-item-name">
-                    ${skill.name}
-                </span>
-
-                <span class="match-status gap">
-                    ⚠ Not available
-                </span>
-            `;
-
-        }
-
-
-        studentBox.appendChild(studentItem);
+        });
 
     });
 
 
-    // Calculate percentage
-
-    const totalSkills = role.skills.length;
+    // Calculate overall match
 
     const percentage =
-        Math.round(
-            (matchedSkills / totalSkills) * 100
-        );
+        totalRequired === 0
+            ? 0
+            : Math.round(
+                (
+                    totalMatched /
+                    totalRequired
+                ) * 100
+            );
 
 
     scoreBox.textContent =
         percentage + "%";
-        const progressBar =
-    document.getElementById("matchProgressBar");
-
-progressBar.style.width =
-    percentage + "%";
 
 
-    // Display skill-gap message
+    if (progressBar) {
 
-    if (skillGaps.length === 0) {
+        progressBar.style.width =
+            percentage + "%";
+
+    }
+
+
+    // Skill gaps
+
+    if (allSkillGaps.length === 0) {
 
         gapBox.textContent =
             "Student meets all industry requirements.";
@@ -655,10 +683,38 @@ progressBar.style.width =
     } else {
 
         gapBox.textContent =
-            "Skill gap: " + skillGaps.join(", ");
+            "Skill gap: " +
+            allSkillGaps.join(", ");
+
+    }
+}
+
+
+// ==========================================
+// FIND STUDENT SKILL LEVEL
+// ==========================================
+
+function findStudentSkillLevel(skillName) {
+
+    const wanted =
+        normalizeSkillName(skillName);
+
+    for (
+        const key in demoStudentSkills
+    ) {
+
+        if (
+            normalizeSkillName(key) ===
+            wanted
+        ) {
+
+            return demoStudentSkills[key];
+
+        }
 
     }
 
+    return null;
 }
 
 
@@ -678,12 +734,51 @@ function getLevelValue(level) {
 
     };
 
-
     return levels[level] || 0;
-
 }
 
 
-// Display match after page loads
+// ==========================================
+// START THE APP
+// ==========================================
 
-displaySkillMatch();
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const roleForm =
+            document.getElementById(
+                "roleForm"
+            );
+
+        if (roleForm) {
+
+            roleForm.addEventListener(
+                "submit",
+                publishOpportunity
+            );
+
+        }
+
+        displaySkills();
+
+        displayRoles();
+
+        updateCounts();
+
+        displaySkillMatch();
+
+    }
+);
+
+
+// Make buttons in the HTML work
+
+window.openRoleForm =
+    openRoleForm;
+
+window.addSkill =
+    addSkill;
+
+window.removeSkill =
+    removeSkill;
