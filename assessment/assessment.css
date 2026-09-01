@@ -1,4 +1,40 @@
+/* Center the AcadX assessment page */
+
 * {
+    box-sizing: border-box;
+}
+
+body 
+{
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #f5f8f7;
+}
+
+.assessment-container {
+    width: 100%;
+    max-width: 720px;
+
+    padding: 30px;
+}
+
+.welcome-card {
+    width: 100%;
+    background: #ffffff;
+
+    padding: 40px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 10px 35px rgba(40, 70, 65, 0.08);
+
+    text-align: center;
+}* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,40 +44,50 @@ body {
     font-family: Arial, sans-serif;
     background: #f7faf9;
     color: #263633;
+    min-height: 100vh;
 }
+
+/* Main page */
 
 .assessment-page {
     min-height: 100vh;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: flex-start;
 
-    padding: 30px;
+    padding: 40px 20px;
+
+    overflow-y: auto;
 }
+
+/* Main card */
 
 .welcome-card {
     width: 100%;
     max-width: 650px;
 
-    background: white;
+    background: #ffffff;
 
-    padding: 55px 50px;
+    padding: 40px;
+
+    border: 1px solid #e1ebe8;
+    border-radius: 20px;
 
     text-align: center;
 
-    border: 1px solid #e1ebe8;
-
-    border-radius: 20px;
-
     box-shadow: 0 15px 45px rgba(40, 70, 65, 0.08);
+
+    margin-bottom: 40px;
 }
+
+/* Icon */
 
 .icon {
     width: 70px;
     height: 70px;
 
-    margin: 0 auto 25px;
+    margin: 0 auto 20px;
 
     display: flex;
     align-items: center;
@@ -51,8 +97,10 @@ body {
 
     border-radius: 50%;
 
-    font-size: 32px;
+    font-size: 30px;
 }
+
+/* Label */
 
 .label {
     margin-bottom: 12px;
@@ -66,32 +114,38 @@ body {
     color: #4d8179;
 }
 
+/* Headings */
+
 h1 {
-    font-size: 42px;
+    font-size: 36px;
 
     margin-bottom: 18px;
 
     color: #294d48;
 }
 
+/* Description */
+
 .description {
-    max-width: 500px;
+    margin: 0 auto 25px;
 
-    margin: 0 auto 35px;
+    max-width: 540px;
 
-    line-height: 1.7;
+    line-height: 1.6;
 
     color: #71807c;
 }
+
+/* Information boxes */
 
 .assessment-info {
     display: flex;
 
     justify-content: center;
 
-    gap: 50px;
+    gap: 45px;
 
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 
     padding: 20px;
 
@@ -105,11 +159,11 @@ h1 {
 
     flex-direction: column;
 
-    gap: 6px;
+    gap: 5px;
 }
 
 .assessment-info strong {
-    font-size: 24px;
+    font-size: 23px;
 
     color: #315f58;
 }
@@ -120,10 +174,12 @@ h1 {
     color: #7b8985;
 }
 
+/* Buttons */
+
 button {
     border: none;
 
-    padding: 15px 28px;
+    padding: 14px 24px;
 
     border-radius: 9px;
 
@@ -137,27 +193,306 @@ button {
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition: 0.2s ease;
 }
 
 button:hover {
     background: #326960;
 
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+}
+
+/* Answer options */
+
+.options {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    width: 100%;
+
+    margin: 25px 0;
+}
+
+.option {
+    display: block;
+
+    width: 100%;
+
+    min-height: 50px;
+
+    padding: 14px 18px;
+
+    background: #ffffff;
+
+    color: #40534f;
+
+    border: 1px solid #dce7e4;
+
+    border-radius: 9px;
+
+    text-align: left;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.option:hover {
+    border-color: #3f7d74;
+
+    background: #f3f8f6;
+}
+
+.option.selected {
+    border-color: #3f7d74;
+
+    background: #eaf4f1;
+
+    color: #2f6d65;
+}
+
+/* Next button */
+
+.next-button {
+    display: inline-block;
+
+    margin-top: 5px;
+}
+
+.next-button:disabled {
+    background: #b8c8c4;
+
+    color: #ffffff;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+/* Result */
+
+.result-score {
+    margin: 25px auto;
+
+    font-size: 64px;
+
+    font-weight: bold;
+
+    color: #3f7d74;
+}
+
+.skill-level {
+    margin-bottom: 25px;
+
+    color: #315f58;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .assessment-page {
+        padding: 20px 12px;
+    }
+
+    .welcome-card {
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .assessment-info {
+        gap: 20px;
+    }
+
+    .option {
+        min-height: 48px;
+    }
+}
+progress-info {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 20px 0 8px;
+
+    font-size: 13px;
+    color: #71807c;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+
+    background: #e8efed;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+}
+
+.progress-fill {
+    height: 100%;
+
+    background: #3f7d74;
+
+    border-radius: 10px;
+
+    transition: width 0.3s ease;
+}
+.skill-results {
+    width: 100%;
+    margin: 30px 0;
+}
+
+.skill-result {
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.skill-header span {
+    font-size: 15px;
+    font-weight: 600;
+    color: #304c48;
+}
+
+.skill-header strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: #3f7d74;
+}
+
+/* The grey background line */
+.skill-bar {
+    width: 100%;
+    height: 12px;
+    background-color: #dfe8e5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* The green percentage line */
+.skill-fill {
+    height: 12px;
+    background-color: #3f7d74;
+    border-radius: 20px;
+    display: block;
+}
+.skill-status {
+    margin-left: 10px;
+
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    font-size: 11px !important;
+
+    font-weight: 600;
+
+    background: #eef4f2;
+
+    color: #3f7d74;
+}
+
+.skill-status.needs-improvement {
+    background: #fff4e8;
+    color: #a66a2c;
+}
+
+.skill-status.moderate {
+    background: #f3f1e8;
+    color: #806f35;
+}
+
+.skill-status.strong {
+    background: #eaf4f1;
+    color: #2f6d65;
+}
+.role-title {
+    margin: 25px 0 15px;
+
+    color: #304c48;
+
+    font-size: 16px;
+}
+
+.role-options {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+}
+
+.role-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 16px;
+
+    background: #ffffff;
+
+    color: #40534f;
+
+    border: 1px solid #dce7e4;
+
+    border-radius: 12px;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.role-card:hover {
+    border-color: #3f7d74;
+
+    background: #f5f9f8;
+}
+
+.role-card.selected {
+    border-color: #3f7d74;
+
+    background: #eaf4f1;
+
+    color: #2f6d65;
+}
+
+.role-icon {
+    font-size: 23px;
+}
+
+#startButton:disabled {
+    background: #b8c8c4;
+
+    cursor: not-allowed;
+
+    transform: none;
 }
 
 @media (max-width: 600px) {
 
-    .welcome-card {
-        padding: 40px 25px;
-    }
-
-    h1 {
-        font-size: 32px;
-    }
-
-    .assessment-info {
-        gap: 25px;
+    .role-options {
+        grid-template-columns: 1fr;
     }
 
 }

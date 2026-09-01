@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AcadX - Skill Sprint</title>
+
+    <link rel="stylesheet" href="game.css">
+</head>
+
+<body>
+
+    <main class="game-container">
+
+        <section class="game-card">
+
+            <!-- Game Header -->
+            <div class="game-header">
+
+                <div>
+                    <p class="label">ACADX</p>
+                    <h1>Skill Sprint</h1>
+                </div>
+
+                <div class="score-box">
+                    <span>Score</span>
+                    <strong id="score">0</strong>
+                </div>
+
+            </div>
+
+
+            <!-- Start Screen -->
+            <div id="start-screen">
+
+                <div class="game-icon">
+                    🎯
+                </div>
+
+                <h2>Ready for a Skill Sprint?</h2>
+
+                <p class="description">
+                    Test your technical knowledge through
+                    quick challenges and improve your skills.
+                </p>
+
+                <div class="game-info">
+
+                    <div>
+                        <strong>5</strong>
+                        <span>Challenges</span>
+                    </div>
+
+                    <div>
+                        <strong>10s</strong>
+                        <span>Per Question</span>
+                    </div>
+
+                    <div>
+                        <strong>⚡</strong>
+                        <span>Quick Practice</span>
+                    </div>
+
+                </div>
+
+                <button
+                    id="startGameButton"
+                    class="primary-button">
+
+                    Start Skill Sprint →
+
+                </button>
+
+            </div>
+
+
+            <!-- Game Screen -->
+            <div id="game-screen" class="hidden">
+
+                <div class="game-top">
+
+                    <span id="question-number">
+                        Challenge 1 of 5
+                    </span>
+
+                    <span class="timer">
+                        ⏱️ <strong id="timer">10</strong>
+                    </span>
+
+                </div>
+
+
+                <!-- Progress -->
+                <div class="progress-track">
+
+                    <div
+                        id="progress-bar"
+                        class="progress-bar">
+                    </div>
+
+                </div>
+
+
+                <!-- Skill -->
+                <p
+                    id="skill-name"
+                    class="skill-tag">
+                    Python
+                </p>
+
+
+                <!-- Question -->
+                <h2
+                    id="game-question"
+                    class="game-question">
+
+                    Question will appear here
+
+                </h2>
+
+
+                <!-- Options -->
+                <div
+                    id="game-options"
+                    class="game-options">
+                </div>
+
+
+                <!-- Next -->
+                <button
+                    id="next-game-button"
+                    class="primary-button hidden">
+
+                    Next Challenge →
+
+                </button>
+
+            </div>
+
+
+            <!-- Result Screen -->
+            <div
+                id="result-screen"
+                class="hidden">
+
+                <div class="game-icon">
+                    🏆
+                </div>
+
+                <p class="label">
+                    ACADX SKILL SPRINT COMPLETE
+                </p>
+
+                <h2>
+                    Great Work!
+                </h2>
+
+                <div class="final-score">
+
+                    <span>Your Score</span>
+
+                    <strong id="final-score">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="result-stats">
+
+                    <div>
+                        <strong id="correct-count">
+                            0
+                        </strong>
+
+                        <span>Correct</span>
+                    </div>
+
+                    <div>
+                        <strong id="accuracy">
+                            0%
+                        </strong>
+
+                        <span>Accuracy</span>
+                    </div>
+
+                    <div>
+                        <strong>
+                            ⚡
+                        </strong>
+
+                        <span>Skills Practiced</span>
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="play-again-button"
+                    class="primary-button">
+
+                    Play Again
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="game.js"></script>
+
+</body>
+
+</html>

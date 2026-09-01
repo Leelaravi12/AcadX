@@ -3,59 +3,134 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AcadX - Skill Assessment</title>
 
+    <!-- Connect CSS -->
     <link rel="stylesheet" href="assessment.css">
 </head>
 
 <body>
 
-    <main class="assessment-page">
+    <main class="assessment-container">
 
         <section class="welcome-card">
 
+            <!-- Icon -->
             <div class="icon">
-                🧠
+                🎯
             </div>
 
-            <p class="label">AcadX</p>
-
-            <h1>Skill Assessment</h1>
-
-            <p class="description">
-                Discover your strengths, identify areas to improve,
-                and understand your career readiness.
+            <!-- Heading -->
+            <p class="label">
+                ACADX
             </p>
 
-            <div class="assessment-info">
+            <h1>
+                Skill Assessment
+            </h1>
 
-                <div>
-                    <strong>10</strong>
-                    <span>Questions</span>
-                </div>
+            <p class="description">
+                Choose the role you are preparing for.
+                Your assessment will evaluate the skills
+                relevant to your career path.
+            </p>
 
-                <div>
-                    <strong>10</strong>
-                    <span>Minutes</span>
-                </div>
+            <!-- Role Selection -->
+            <h3 class="role-title">
+                Select your target role
+            </h3>
 
-                <div>
-                    <strong>3</strong>
-                    <span>Skills</span>
-                </div>
+            <div class="role-options">
+
+                <!-- Software Developer -->
+                <button
+                    type="button"
+                    class="role-card"
+                    onclick="selectRole('Software Developer')">
+
+                    <span class="role-icon">
+                        💻
+                    </span>
+
+                    <span>
+                        Software Developer
+                    </span>
+
+                </button>
+
+
+                <!-- Data Analyst -->
+                <button
+                    type="button"
+                    class="role-card"
+                    onclick="selectRole('Data Analyst')">
+
+                    <span class="role-icon">
+                        📊
+                    </span>
+
+                    <span>
+                        Data Analyst
+                    </span>
+
+                </button>
+
+
+                <!-- AI / ML Engineer -->
+                <button
+                    type="button"
+                    class="role-card"
+                    onclick="selectRole('AI / ML Engineer')">
+
+                    <span class="role-icon">
+                        🤖
+                    </span>
+
+                    <span>
+                        AI / ML Engineer
+                    </span>
+
+                </button>
+
+
+                <!-- Cloud Engineer -->
+                <button
+                    type="button"
+                    class="role-card"
+                    onclick="selectRole('Cloud Engineer')">
+
+                    <span class="role-icon">
+                        ☁️
+                    </span>
+
+                    <span>
+                        Cloud Engineer
+                    </span>
+
+                </button>
 
             </div>
 
-            <button id="startButton">
+
+            <!-- Start Assessment Button -->
+            <button
+                type="button"
+                id="startButton"
+                disabled>
+
                 Start Assessment →
+
             </button>
 
         </section>
 
     </main>
 
+
+    <!-- Connect JavaScript -->
     <script src="assessment.js"></script>
 
 </body>
