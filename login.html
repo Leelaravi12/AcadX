@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AcadX | Login</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-body">
+
+    <main class="auth-page">
+
+        <!-- LOGO -->
+        <div class="auth-logo">
+            <span class="logo-box">A</span>
+            <span class="logo-name">AcadX</span>
+        </div>
+
+
+        <!-- AUTH CARD -->
+        <section class="auth-card">
+
+            <!-- LOGIN -->
+            <div id="loginSection">
+
+                <p class="section-label">WELCOME BACK</p>
+
+                <h1>Login to AcadX</h1>
+
+                <p class="auth-intro">
+                    Continue your journey from where you left off.
+                </p>
+
+
+                <form id="loginForm">
+
+                    <div class="auth-field">
+
+                        <label for="loginEmail">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="auth-field">
+
+                        <label for="loginPassword">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <p id="loginMessage" class="auth-message"></p>
+
+
+                    <button type="submit" class="auth-button">
+                        Login →
+                    </button>
+
+                    <div class="auth-divider">
+    <span>OR</span>
+</div>
+
+<button
+    type="button"
+    class="google-button"
+    onclick="continueWithGoogle()">
+
+    <span class="google-icon">G</span>
+
+    Continue with Google
+
+</button>
+
+                </form>
+
+
+                <p class="auth-switch">
+                    Don't have an account?
+                    <button type="button" onclick="showSignup()">
+                        Sign Up
+                    </button>
+                </p>
+
+            </div>
+
+
+            <!-- SIGN UP -->
+            <div id="signupSection" class="hidden-auth">
+
+                <p class="section-label">GET STARTED</p>
+
+                <h1>Create your AcadX account</h1>
+
+                <p class="auth-intro">
+                    Create an account to start building your skills and career.
+                </p>
+
+
+                <form id="signupForm">
+
+                    <div class="auth-field">
+
+                        <label for="signupName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="signupName"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="auth-field">
+
+                        <label for="signupEmail">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="signupEmail"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="auth-field">
+
+                        <label for="signupPassword">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="signupPassword"
+                            placeholder="Create a password"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <p id="signupMessage" class="auth-message"></p>
+
+
+                    <button type="submit" class="auth-button">
+                        Create Account →
+                    </button>
+
+                    <div class="auth-divider">
+    <span>OR</span>
+</div>
+
+<button
+    type="button"
+    class="google-button"
+    onclick="continueWithGoogle()">
+
+    <span class="google-icon">G</span>
+
+    Continue with Google
+
+</button>
+
+                </form>
+
+
+                <p class="auth-switch">
+                    Already have an account?
+                    <button type="button" onclick="showLogin()">
+                        Login
+                    </button>
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <p class="auth-footer">
+            AcadX · Connecting academia with opportunity.
+        </p>
+
+    </main>
+
+
+    <script src="login.js"></script>
+
+</body>
+</html>
