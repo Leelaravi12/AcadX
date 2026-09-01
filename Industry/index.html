@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TalentMesh | Industry Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span class="logo-mark">T</span>
+            <span>Talent<span class="green">Mesh</span></span>
+        </div>
+
+        <nav>
+            <a href="#" class="active">Dashboard</a>
+            <a href="#roles">Opportunities</a>
+            <a href="#skills">Skills</a>
+        </nav>
+
+        <span class="portal-label">
+            Industry Portal
+        </span>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <div class="welcome-text">
+
+                <p class="eyebrow">
+                    INDUSTRY PORTAL
+                </p>
+
+                <h1>
+                    Shape the talent<br>
+                    <span>you need.</span>
+                </h1>
+
+                <p class="intro">
+                    Define the skills and requirements for your
+                    opportunities and connect them with the right
+                    student talent.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="openRoleForm()">
+
+                    + Create New Role
+
+                </button>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <p class="card-label">
+                    INDUSTRY DEMAND
+                </p>
+
+                <h2 id="skillCount">
+                    0
+                </h2>
+
+                <p>
+                    skills currently defined
+                </p>
+
+                <div class="line"></div>
+
+                <div class="summary-row">
+                    <span>Published roles</span>
+                    <strong id="roleCount">0</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Draft roles</span>
+                    <strong id="draftCount">0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DASHBOARD STATS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <span class="stat-title">ACTIVE ROLES</span>
+                <strong id="activeRoles">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-title">SKILLS DEFINED</span>
+                <strong id="totalSkills">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-title">OPPORTUNITIES</span>
+                <strong id="opportunityCount">0</strong>
+            </div>
+
+        </section>
+
+
+        <!-- ROLE CREATION -->
+
+        <section
+            class="role-section"
+            id="roleFormSection">
+
+            <div class="section-heading">
+
+                <p class="eyebrow">
+                    CREATE OPPORTUNITY
+                </p>
+
+                <h2>
+                    Define a new role
+                </h2>
+
+                <p>
+                    Tell students what your industry is looking for.
+                </p>
+
+            </div>
+
+
+            <form id="roleForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Role Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="roleTitle"
+                            placeholder="e.g. Software Developer Intern"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Opportunity Type
+                        </label>
+
+                        <select id="roleType">
+
+                            <option>Internship</option>
+                            <option>Full-time Job</option>
+                            <option>Part-time Job</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="roleLocation"
+                            placeholder="e.g. Bengaluru"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Duration
+                        </label>
+
+                        <input
+                            type="text"
+                            id="roleDuration"
+                            placeholder="e.g. 6 Months"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Role Description
+                    </label>
+
+                    <textarea
+                        id="roleDescription"
+                        placeholder="Briefly describe the role..."
+                        rows="4"></textarea>
+
+                </div>
+
+
+                <!-- SKILLS -->
+
+                <div class="skills-area" id="skills">
+
+                    <div class="skills-heading">
+
+                        <div>
+
+                            <p class="eyebrow">
+                                SKILL REQUIREMENTS
+                            </p>
+
+                            <h3>
+                                What skills are required?
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="skill-input-row">
+
+                        <input
+                            type="text"
+                            id="skillInput"
+                            placeholder="Enter a skill e.g. Python">
+
+                        <select id="skillLevel">
+
+                            <option>Beginner</option>
+                            <option selected>Intermediate</option>
+                            <option>Advanced</option>
+
+                        </select>
+
+                        <button
+                            type="button"
+                            class="add-btn"
+                            onclick="addSkill()">
+
+                            Add Skill
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="skillList"
+                        class="skill-list">
+
+                        <p class="empty-message">
+                            No skills added yet.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        onclick="clearForm()">
+
+                        Clear
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+
+                        Publish Opportunity →
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- PUBLISHED ROLES -->
+
+        <section
+            class="roles-section"
+            id="roles">
+
+            <div class="section-heading">
+
+                <p class="eyebrow">
+                    YOUR OPPORTUNITIES
+                </p>
+
+                <h2>
+                    Published roles
+                </h2>
+
+            </div>
+
+
+            <div
+                id="roleList"
+                class="role-list">
+
+                <div class="empty-role">
+                    <h3>No opportunities yet</h3>
+
+                    <p>
+                        Create your first industry opportunity
+                        using the form above.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- SKILL MATCH PREVIEW -->
+
+<section class="match-section" id="skillMatch">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">
+            SKILL MAPPING
+        </p>
+
+        <h2>
+            Industry Skill Match
+        </h2>
+
+        <p>
+            Compare industry requirements with a student's current skills.
+        </p>
+
+    </div>
+
+
+    <div class="match-card">
+
+        <div class="match-header">
+
+            <div>
+
+                <p class="card-label">
+                    DEMO MATCH
+                </p>
+
+                <h3>
+                    Software Developer Intern
+                </h3>
+
+            </div>
+
+           <div class="match-score">
+
+    <strong id="matchScore">
+        0%
+    </strong>
+
+    <span>
+        Match
+    </span>
+
+    <div class="match-progress">
+        <div class="match-progress-bar" id="matchProgressBar"></div>
+    </div>
+
+</div>
+        </div>
+
+
+        <div class="match-content">
+
+            <div class="match-column">
+
+                <h4>
+                    Industry Requirements
+                </h4>
+
+                <div id="industryRequirements">
+                </div>
+
+            </div>
+
+
+            <div class="match-column">
+
+                <h4>
+                    Student Skills
+                </h4>
+
+                <div id="studentSkills">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="gap-summary">
+
+            <strong>
+                Skill Gap
+            </strong>
+
+            <span id="gapMessage">
+                Add skills to view the comparison.
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
