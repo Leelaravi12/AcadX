@@ -144,7 +144,9 @@ function publishOpportunity(event) {
 
     const role = {
         id: Date.now(),
-
+       company:
+    document.getElementById("companyName").value.trim(),
+       
         title:
             document.getElementById("roleTitle").value.trim(),
 
@@ -248,7 +250,12 @@ function displayRoles() {
                 ${getInitials(role.title)}
             </div>
 
+           
+            
             <div class="role-info">
+              <p class="company-name">
+                 🏢 ${role.company}
+             </p>
 
                 <h3>
                     ${role.title}
