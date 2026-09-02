@@ -442,253 +442,209 @@ function normalizeSkillName(name) {
 
 function displaySkillMatch() {
 
-    const industryBox =
-        document.getElementById(
-            "industryRequirements"
-        );
+    const matchRoleList =
+        document.getElementById("matchRoleList");
 
-    const studentBox =
-        document.getElementById(
-            "studentSkills"
-        );
+    if (!matchRoleList) return;
 
-    const scoreBox =
-        document.getElementById(
-            "matchScore"
-        );
-
-    const gapBox =
-        document.getElementById(
-            "gapMessage"
-        );
-
-    const progressBar =
-        document.getElementById(
-            "matchProgressBar"
-        );
-
-    if (
-        !industryBox ||
-        !studentBox ||
-        !scoreBox ||
-        !gapBox
-    ) {
-        return;
-    }
+    matchRoleList.innerHTML = "";
 
     if (roles.length === 0) {
 
-        industryBox.innerHTML =
-            "<p class='empty-message'>No published role available.</p>";
-
-        studentBox.innerHTML =
-            "<p class='empty-message'>No student profile available.</p>";
-
-        scoreBox.textContent = "0%";
-
-        if (progressBar) {
-            progressBar.style.width = "0%";
-        }
-
-        gapBox.textContent = "";
+        matchRoleList.innerHTML = `
+            <div class="match-card">
+                <p class="empty-message">
+                    No published role available.
+                </p>
+            </div>
+        `;
 
         return;
     }
 
-    industryBox.innerHTML = "";
-
-    studentBox.innerHTML = "";
-
-    let totalRequired = 0;
-
-    let totalMatched = 0;
-
-    let allSkillGaps = [];
-
-
-    // Check EVERY published opportunity
-
     roles.forEach(role => {
 
-        const industryHeading =
-            document.createElement("h4");
+        let totalRequired = 0;
+        let totalMatched = 0;
+        let skillGaps = [];
 
-        industryHeading.textContent =
-            role.title;
-
-        industryBox.appendChild(
-            industryHeading
-        );
-
-
-        const studentHeading =
-            document.createElement("h4");
-
-        studentHeading.textContent =
-            role.title;
-
-        studentBox.appendChild(
-            studentHeading
-        );
-
+        let industryHTML = "";
+        let studentHTML = "";
 
         role.skills.forEach(skill => {
 
             totalRequired++;
 
-
             const studentLevel =
-                findStudentSkillLevel(
-                    skill.name
-                );
+                findStudentSkillLevel(skill.name);
 
+            industryHTML += `
+                <div class="match-item">
+                    <span class="match-item-name">
+                        ${skill.name}
+                    </span>
 
-            // Industry requirement
-
-            const industryItem =
-                document.createElement("div");
-
-            industryItem.className =
-                "match-item";
-
-            industryItem.innerHTML = `
-
-                <span class="match-item-name">
-                    ${skill.name}
-                </span>
-
-                <span class="match-item-level">
-                    Required: ${skill.level}
-                </span>
-
+                    <span class="match-item-level">
+                        Required: ${skill.level}
+                    </span>
+                </div>
             `;
-
-            industryBox.appendChild(
-                industryItem
-            );
-
-
-            // Student result
-
-            const studentItem =
-                document.createElement("div");
-
-            studentItem.className =
-                "match-item";
-
 
             if (studentLevel) {
 
                 const meetsRequirement =
-                    getLevelValue(studentLevel)
-                    >=
+                    getLevelValue(studentLevel) >=
                     getLevelValue(skill.level);
-
 
                 if (meetsRequirement) {
 
                     totalMatched++;
 
-                    studentItem.innerHTML = `
+                    studentHTML += `
+                        <div class="match-item">
+                            <span class="match-item-name">
+                                ${skill.name}
+                            </span>
 
-                        <span class="match-item-name">
-                            ${skill.name}
-                        </span>
-
-                        <span class="match-status good">
-                            ✓ ${studentLevel}
-                        </span>
-
+                            <span class="match-status good">
+                                ✓ ${studentLevel}
+                            </span>
+                        </div>
                     `;
 
                 } else {
 
-                    allSkillGaps.push(
-                        `${role.title}: ${skill.name}`
-                    );
+                    skillGaps.push(skill.name);
 
-                    studentItem.innerHTML = `
+                    studentHTML += `
+                        <div class="match-item">
+                            <span class="match-item-name">
+                                ${skill.name}
+                            </span>
 
-                        <span class="match-item-name">
-                            ${skill.name}
-                        </span>
-
-                        <span class="match-status gap">
-                            ⚠ ${studentLevel}
-                        </span>
-
+                            <span class="match-status gap">
+                                ⚠ ${studentLevel}
+                            </span>
+                        </div>
                     `;
                 }
 
             } else {
 
-                allSkillGaps.push(
-                    `${role.title}: ${skill.name}`
-                );
+                skillGaps.push(skill.name);
 
-                studentItem.innerHTML = `
+                studentHTML += `
+                    <div class="match-item">
+                        <span class="match-item-name">
+                            ${skill.name}
+                        </span>
 
-                    <span class="match-item-name">
-                        ${skill.name}
-                    </span>
-
-                    <span class="match-status gap">
-                        ⚠ Not available
-                    </span>
-
+                        <span class="match-status gap">
+                            ⚠ Not available
+                        </span>
+                    </div>
                 `;
             }
 
-            studentBox.appendChild(
-                studentItem
-            );
-
         });
+
+        const percentage =
+            totalRequired === 0
+                ? 0
+                : Math.round(
+                    (totalMatched / totalRequired) * 100
+                );
+
+        const gapText =
+            skillGaps.length === 0
+                ? "Student meets all industry requirements."
+                : "Skill gap: " + skillGaps.join(", ");
+
+        const matchCard =
+            document.createElement("div");
+
+        matchCard.className = "match-card";
+
+        matchCard.innerHTML = `
+
+            <div class="match-header">
+
+                <div>
+
+                    <p class="card-label">
+                        DEMO MATCH
+                    </p>
+
+                    <h3>
+                        ${role.title}
+                    </h3>
+
+                </div>
+
+                <div class="match-score">
+
+                    <strong>
+                        ${percentage}%
+                    </strong>
+
+                    <span>
+                        Match
+                    </span>
+
+                    <div class="match-progress">
+                        <div
+                            class="match-progress-bar"
+                            style="width:${percentage}%">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="match-content">
+
+                <div class="match-column">
+
+                    <h4>
+                        Industry Requirements
+                    </h4>
+
+                    ${industryHTML}
+
+                </div>
+
+                <div class="match-column">
+
+                    <h4>
+                        Student Skills
+                    </h4>
+
+                    ${studentHTML}
+
+                </div>
+
+            </div>
+
+            <div class="gap-summary">
+
+                <strong>
+                    Skill Gap
+                </strong>
+
+                <span>
+                    ${gapText}
+                </span>
+
+            </div>
+
+        `;
+
+        matchRoleList.appendChild(matchCard);
 
     });
 
-
-    // Calculate overall match
-
-    const percentage =
-        totalRequired === 0
-            ? 0
-            : Math.round(
-                (
-                    totalMatched /
-                    totalRequired
-                ) * 100
-            );
-
-
-    scoreBox.textContent =
-        percentage + "%";
-
-
-    if (progressBar) {
-
-        progressBar.style.width =
-            percentage + "%";
-
-    }
-
-
-    // Skill gaps
-
-    if (allSkillGaps.length === 0) {
-
-        gapBox.textContent =
-            "Student meets all industry requirements.";
-
-    } else {
-
-        gapBox.textContent =
-            "Skill gap: " +
-            allSkillGaps.join(", ");
-
-    }
 }
-
 
 // ==========================================
 // FIND STUDENT SKILL LEVEL
