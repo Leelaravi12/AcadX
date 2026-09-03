@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcadX - Student Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>AcadX</h1>
+        <p>Student Profile</p>
+    </header>
+
+    <main>
+
+      <!-- Student Profile -->
+<section class="profile-card">
+
+    <div class="profile-info">
+
+        <div class="profile-avatar">
+            👤
+        </div>
+
+        <div>
+            <h2>Student Name</h2>
+            <p>Computer Science & Engineering</p>
+            <p>College Name</p>
+            <p>3rd Year</p>
+        </div>
+
+    </div>
+
+    <button class="edit-button">
+        Edit Profile
+    </button>
+    <a href="portfolio.html" class="portfolio-button">
+    View My Portfolio
+</a>
+
+    <div id="edit-form" class="edit-form">
+
+    <h3>Edit Profile</h3>
+
+    <label for="student-name">Name</label>
+    <input type="text" id="student-name" placeholder="Enter your name">
+
+    <label for="student-branch">Branch</label>
+    <input type="text" id="student-branch" placeholder="Enter your branch">
+
+    <label for="student-college">College</label>
+    <input type="text" id="student-college" placeholder="Enter your college">
+
+    <label for="student-year">Year</label>
+    <input type="text" id="student-year" placeholder="Enter your year">
+
+    <button id="save-profile" class="save-button">
+        Save Profile
+    </button>
+
+</div>
+
+</section>
+
+        <!-- About -->
+        <section>
+            <h2>About Me</h2>
+
+            <p>
+                I am a Computer Science student interested in
+                software development, artificial intelligence and
+                solving real-world problems.
+            </p>
+        </section>
+<!-- Skills -->
+<section class="skills-section">
+
+    <h2>My Skills</h2>
+
+    <p class="section-description">
+        Skills I have developed through academics, projects and practice.
+    </p>
+
+    <div id="skills-container" class="skills-container">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Git & GitHub</span>
+    </div>
+
+    <div class="add-skill">
+
+        <input
+            type="text"
+            id="new-skill"
+            placeholder="Enter a new skill"
+        >
+
+        <button id="add-skill-button">
+            + Add Skill
+        </button>
+
+    </div>
+
+</section>
+        <!-- Education -->
+<section class="education-section">
+
+    <h2>Education</h2>
+
+    <div class="education-card">
+
+        <h3>Bachelor of Engineering</h3>
+
+        <p><strong>Branch:</strong> Computer Science & Engineering</p>
+
+        <p><strong>College:</strong> College Name</p>
+
+        <p><strong>Duration:</strong> 2024 - 2028</p>
+
+    </div>
+
+    <div class="education-card">
+
+        <h3>Pre-University / 12th</h3>
+
+        <p><strong>Stream:</strong> Science</p>
+
+        <p><strong>School/College:</strong> College Name</p>
+
+        <p><strong>Duration:</strong> 2022 - 2024</p>
+
+    </div>
+
+</section>
+<!-- Projects -->
+<section class="projects-section">
+
+    <h2>My Projects</h2>
+
+    <div id="projects-container" class="projects-container">
+
+        <article class="project-card">
+
+            <h3>Food Waste Management System</h3>
+
+            <p>
+                A web platform that connects food donors with
+                organizations to help reduce food wastage.
+            </p>
+
+            <div class="project-tech">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Firebase</span>
+            </div>
+
+            <button class="project-button">
+                View Project
+            </button>
+
+        </article>
+
+    </div>
+
+    <!-- Add Project Form -->
+    <div class="add-project">
+
+        <h3>Add New Project</h3>
+
+        <input
+            type="text"
+            id="project-title"
+            placeholder="Project title"
+        >
+
+        <textarea
+            id="project-description"
+            placeholder="Project description"
+        ></textarea>
+
+        <input
+            type="text"
+            id="project-technologies"
+            placeholder="Technologies (e.g. HTML, CSS, JavaScript)"
+        >
+
+        <button id="add-project-button">
+            + Add Project
+        </button>
+
+    </div>
+
+</section>
+
+     <!-- Certifications -->
+<section class="certifications-section">
+
+    <h2>My Certifications</h2>
+
+    <div id="certifications-container" class="certification-container">
+
+        <div class="certification-card">
+
+            <h3>Python Programming</h3>
+
+            <p>Issued by: Organization Name</p>
+
+            <p>Year: 2026</p>
+
+            <button class="certificate-button">
+                View Certificate
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Add Certification -->
+    <div class="add-certification">
+
+        <h3>Add Certification</h3>
+
+        <input
+            type="text"
+            id="certificate-name"
+            placeholder="Certificate name"
+        >
+
+        <input
+            type="text"
+            id="certificate-issuer"
+            placeholder="Issued by"
+        >
+
+        <input
+            type="text"
+            id="certificate-year"
+            placeholder="Year"
+        >
+
+        <input
+            type="url"
+            id="certificate-link"
+            placeholder="Certificate link (optional)"
+        >
+
+        <button id="add-certificate-button">
+            + Add Certification
+        </button>
+
+    </div>
+
+</section>
+      <!-- Achievements -->
+<section class="achievements-section">
+
+    <h2>My Achievements</h2>
+
+    <div id="achievements-container">
+
+        <div class="achievement-card">
+
+            <h3>Hackathon Participation</h3>
+
+            <p>
+                Participated in a technology hackathon and developed
+                a solution for a real-world problem.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Add Achievement -->
+    <div class="add-achievement">
+
+        <h3>Add Achievement</h3>
+
+        <input
+            type="text"
+            id="achievement-title"
+            placeholder="Achievement title"
+        >
+
+        <textarea
+            id="achievement-description"
+            placeholder="Describe your achievement"
+        ></textarea>
+
+        <button id="add-achievement-button">
+            + Add Achievement
+        </button>
+
+    </div>
+
+</section>
+
+    </main>
+    <script src="student-profile.js"></script>
+
+</body>
+
+</html>

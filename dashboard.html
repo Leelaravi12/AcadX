@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -8,6 +9,7 @@
     <title>AcadX | Student Dashboard</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -52,12 +54,13 @@
 
 <main class="dashboard">
 
-
-    <!-- WELCOME -->
+    <!-- =========================================
+         WELCOME SECTION
+    ========================================== -->
 
     <section class="welcome-section">
 
-        <div>
+        <div class="welcome-content">
 
             <p class="small-heading">
                 STUDENT DASHBOARD
@@ -97,12 +100,11 @@
 
 
 
-    <!-- QUICK STATS -->
+    <!-- =========================================
+         PROGRESS SUMMARY
+    ========================================== -->
 
     <section class="stats-grid">
-
-
-        <!-- OVERALL SCORE -->
 
         <div class="stat-card">
 
@@ -119,14 +121,11 @@
             </h2>
 
             <span id="scoreMessage">
-                Complete all assessments
+                Complete assessments
             </span>
 
         </div>
 
-
-
-        <!-- ASSESSMENT STATUS -->
 
         <div class="stat-card">
 
@@ -149,9 +148,6 @@
         </div>
 
 
-
-        <!-- SKILLS TO IMPROVE -->
-
         <div class="stat-card">
 
             <div class="stat-icon">
@@ -172,9 +168,6 @@
 
         </div>
 
-
-
-        <!-- OPPORTUNITIES -->
 
         <div class="stat-card">
 
@@ -200,22 +193,22 @@
 
 
 
-    <!-- ASSESSMENT NOTICE -->
+    <!-- =========================================
+         ASSESSMENTS
+    ========================================== -->
 
-    <section
-        class="dashboard-card"
-        id="assessmentNotice">
+    <section class="dashboard-card assessments-card">
 
         <div class="card-heading">
 
             <div>
 
                 <p class="small-heading">
-                    GET STARTED
+                    BUILD YOUR SKILLS
                 </p>
 
                 <h2>
-                    Complete your skill assessments
+                    Skill Assessments
                 </h2>
 
             </div>
@@ -223,32 +216,203 @@
         </div>
 
 
-        <p id="assessmentNoticeText">
-
-            Take all four technical skill assessments
-            to generate your personalized skill gap analysis.
-
+        <p class="section-description">
+            Choose an assessment based on the career role
+            you want to prepare for.
         </p>
 
 
-        <button
-            class="primary-button"
-            onclick="window.location.href='skills.html'">
+        <div class="assessment-list">
 
-            Take Skill Assessment →
 
-        </button>
+            <!-- SOFTWARE DEVELOPER -->
+
+            <div class="assessment-item">
+
+                <div class="assessment-icon">
+                    💻
+                </div>
+
+                <div class="assessment-info">
+
+                    <h3>
+                        Software Developer
+                    </h3>
+
+                    <p>
+                        Programming, web development,
+                        DSA and problem solving
+                    </p>
+
+                </div>
+
+                <div class="assessment-action">
+
+                    <span
+                        id="softwareDeveloperStatus"
+                        class="assessment-status">
+                        Not Started
+                    </span>
+
+                    <button
+                        id="softwareDeveloperButton"
+                        class="primary-button"
+                        onclick="startAssessment('Software Developer')">
+
+                        Take Assessment →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DATA ANALYST -->
+
+            <div class="assessment-item">
+
+                <div class="assessment-icon">
+                    📊
+                </div>
+
+                <div class="assessment-info">
+
+                    <h3>
+                        Data Analyst
+                    </h3>
+
+                    <p>
+                        Data analysis, problem solving
+                        and technical fundamentals
+                    </p>
+
+                </div>
+
+                <div class="assessment-action">
+
+                    <span
+                        id="dataAnalystStatus"
+                        class="assessment-status">
+                        Not Started
+                    </span>
+
+                    <button
+                        id="dataAnalystButton"
+                        class="primary-button"
+                        onclick="startAssessment('Data Analyst')">
+
+                        Take Assessment →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AI ML -->
+
+            <div class="assessment-item">
+
+                <div class="assessment-icon">
+                    🤖
+                </div>
+
+                <div class="assessment-info">
+
+                    <h3>
+                        AI / ML Engineer
+                    </h3>
+
+                    <p>
+                        Artificial intelligence,
+                        machine learning and programming
+                    </p>
+
+                </div>
+
+                <div class="assessment-action">
+
+                    <span
+                        id="aiMlStatus"
+                        class="assessment-status">
+                        Not Started
+                    </span>
+
+                    <button
+                        id="aiMlButton"
+                        class="primary-button"
+                        onclick="startAssessment('AI / ML Engineer')">
+
+                        Take Assessment →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CLOUD -->
+
+            <div class="assessment-item">
+
+                <div class="assessment-icon">
+                    ☁️
+                </div>
+
+                <div class="assessment-info">
+
+                    <h3>
+                        Cloud Engineer
+                    </h3>
+
+                    <p>
+                        Cloud computing, infrastructure
+                        and technical fundamentals
+                    </p>
+
+                </div>
+
+                <div class="assessment-action">
+
+                    <span
+                        id="cloudEngineerStatus"
+                        class="assessment-status">
+                        Not Started
+                    </span>
+
+                    <button
+                        id="cloudEngineerButton"
+                        class="primary-button"
+                        onclick="startAssessment('Cloud Engineer')">
+
+                        Take Assessment →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
 
 
 
-    <!-- MAIN CONTENT -->
+    <!-- =========================================
+         SKILLS + CAREER READINESS
+    ========================================== -->
 
     <section class="dashboard-grid">
 
 
-        <!-- SKILLS -->
+        <!-- SKILL OVERVIEW -->
 
         <div class="dashboard-card skills-card">
 
@@ -266,7 +430,6 @@
 
                 </div>
 
-
                 <button
                     class="text-button"
                     onclick="window.location.href='skills.html'">
@@ -278,134 +441,15 @@
             </div>
 
 
-
-            <!-- HTML & CSS -->
-
-            <div class="skill-item">
-
-                <div class="skill-info">
-
-                    <span>
-                        HTML & CSS
-                    </span>
-
-                    <strong id="htmlcssScore">
-                        —
-                    </strong>
-
-                </div>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-fill"
-                        id="htmlcssProgress"
-                        style="width:0%;">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- JAVASCRIPT -->
-
-            <div class="skill-item">
-
-                <div class="skill-info">
-
-                    <span>
-                        JavaScript
-                    </span>
-
-                    <strong id="javascriptScore">
-                        —
-                    </strong>
-
-                </div>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-fill"
-                        id="javascriptProgress"
-                        style="width:0%;">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- PYTHON -->
-
-            <div class="skill-item">
-
-                <div class="skill-info">
-
-                    <span>
-                        Python
-                    </span>
-
-                    <strong id="pythonScore">
-                        —
-                    </strong>
-
-                </div>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-fill"
-                        id="pythonProgress"
-                        style="width:0%;">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- C PROGRAMMING -->
-
-            <div class="skill-item">
-
-                <div class="skill-info">
-
-                    <span>
-                        C Programming
-                    </span>
-
-                    <strong id="cScore">
-                        —
-                    </strong>
-
-                </div>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-fill"
-                        id="cProgress"
-                        style="width:0%;">
-
-                    </div>
-
-                </div>
-
+            <div id="dashboardSkills">
+                <!-- Assessment skills will appear here -->
             </div>
 
         </div>
 
 
 
-        <!-- SKILL GAP -->
+        <!-- CAREER READINESS -->
 
         <div class="dashboard-card gap-card">
 
@@ -426,7 +470,6 @@
             </div>
 
 
-
             <div class="readiness">
 
                 <div class="readiness-circle">
@@ -445,10 +488,8 @@
                     </h3>
 
                     <p id="readinessText">
-
-                        Complete all four assessments
-                        to calculate your career readiness.
-
+                        Complete your assessments to
+                        calculate your career readiness.
                     </p>
 
                 </div>
@@ -456,11 +497,10 @@
             </div>
 
 
-
             <div class="gap-message">
 
                 <strong>
-                    Next step:
+                    Areas to focus on:
                 </strong>
 
                 <div
@@ -488,14 +528,13 @@
             </div>
 
 
-
             <button
                 id="skillGapButton"
                 class="primary-button"
                 disabled
                 style="opacity:0.6;">
 
-                Complete All Assessments
+                Complete Assessments
 
             </button>
 
@@ -505,7 +544,65 @@
 
 
 
-    <!-- OPPORTUNITIES -->
+    <!-- =========================================
+         SKILL SPRINT
+    ========================================== -->
+
+    <section class="dashboard-card sprint-card">
+
+        <div class="sprint-content">
+
+            <div>
+
+                <p class="small-heading">
+                    QUICK PRACTICE
+                </p>
+
+                <h2>
+                    ⚡ Skill Sprint
+                </h2>
+
+                <p>
+                    Test your technical knowledge through
+                    quick challenges and improve your skills.
+                </p>
+
+            </div>
+
+
+            <div class="sprint-action">
+
+                <div class="sprint-info">
+
+                    <strong id="lastGameScore">
+                        —
+                    </strong>
+
+                    <span>
+                        Latest Score
+                    </span>
+
+                </div>
+
+                <button
+                    class="primary-button"
+                    onclick="window.location.href='game.html'">
+
+                    Start Skill Sprint →
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         OPPORTUNITIES
+    ========================================== -->
 
     <section class="dashboard-card opportunities-card">
 
@@ -535,11 +632,8 @@
         </div>
 
 
-
         <div class="opportunity-grid">
 
-
-            <!-- OPPORTUNITY 1 -->
 
             <div class="opportunity">
 
@@ -583,8 +677,6 @@
 
 
 
-            <!-- OPPORTUNITY 2 -->
-
             <div class="opportunity">
 
                 <span class="opportunity-label">
@@ -625,8 +717,6 @@
             </div>
 
 
-
-            <!-- OPPORTUNITY 3 -->
 
             <div class="opportunity">
 
@@ -674,7 +764,6 @@
 </main>
 
 
-
 <footer class="footer">
 
     <strong>
@@ -693,10 +782,9 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
-    /* ================================
+    /* =========================================
        PROFILE DATA
-    ================================= */
+    ========================================== */
 
     const savedProfile =
         localStorage.getItem("acadxProfile");
@@ -708,20 +796,41 @@ document.addEventListener("DOMContentLoaded", function () {
             const profile =
                 JSON.parse(savedProfile);
 
-            if (profile.name) {
+            const studentName =
+                document.getElementById("studentName");
 
-                document.getElementById(
-                    "studentName"
-                ).textContent =
+            const careerGoal =
+                document.getElementById("careerGoal");
+
+
+            if (profile.name && studentName) {
+
+                studentName.textContent =
                     profile.name + "!";
 
             }
 
-            if (profile.careerGoal) {
 
-                document.getElementById(
-                    "careerGoal"
-                ).textContent =
+            /*
+             * Use the selected assessment role as
+             * the career goal when available.
+             * Otherwise use the saved profile career goal.
+             */
+
+            const selectedRole =
+                localStorage.getItem(
+                    "acadx_selected_role"
+                );
+
+
+            if (selectedRole && careerGoal) {
+
+                careerGoal.textContent =
+                    selectedRole;
+
+            } else if (profile.careerGoal && careerGoal) {
+
+                careerGoal.textContent =
                     profile.careerGoal;
 
             }
@@ -734,50 +843,176 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
+    } else {
+
+        /*
+         * Even if there is no profile data,
+         * use the selected assessment role.
+         */
+
+        const selectedRole =
+            localStorage.getItem(
+                "acadx_selected_role"
+            );
+
+        const careerGoal =
+            document.getElementById(
+                "careerGoal"
+            );
+
+
+        if (selectedRole && careerGoal) {
+
+            careerGoal.textContent =
+                selectedRole;
+
+        }
+
     }
 
 
 
-    /* ================================
+    /* =========================================
        ASSESSMENT DATA
-    ================================= */
+    ========================================== */
 
-    const skills = [
-        "htmlcss",
-        "javascript",
-        "python",
-        "c"
+    const assessments = [
+
+        {
+            role: "Software Developer",
+            key: "software",
+            statusId: "softwareDeveloperStatus",
+            buttonId: "softwareDeveloperButton"
+        },
+
+        {
+            role: "Data Analyst",
+            key: "data",
+            statusId: "dataAnalystStatus",
+            buttonId: "dataAnalystButton"
+        },
+
+        {
+            role: "AI / ML Engineer",
+            key: "ai",
+            statusId: "aiMlStatus",
+            buttonId: "aiMlButton"
+        },
+
+        {
+            role: "Cloud Engineer",
+            key: "cloud",
+            statusId: "cloudEngineerStatus",
+            buttonId: "cloudEngineerButton"
+        }
+
     ];
 
 
-    let completed = 0;
 
+    /* =========================================
+       CHECK COMPLETED ASSESSMENTS
+    ========================================== */
+
+    let completedAssessments = [];
     let totalScore = 0;
 
-    let scores = {};
+
+    assessments.forEach(function (assessment) {
+
+        const completionKey =
+            "acadx_assessment_" +
+            assessment.key;
+
+        const scoreKey =
+            "acadx_score_" +
+            assessment.key;
 
 
-
-    skills.forEach(function (skill) {
-
-        const score =
+        const isCompleted =
             localStorage.getItem(
-                "acadx_" + skill + "_score"
+                completionKey
+            ) === "completed";
+
+
+        const scoreValue =
+            localStorage.getItem(
+                scoreKey
             );
 
 
-        if (score !== null) {
+        const statusElement =
+            document.getElementById(
+                assessment.statusId
+            );
 
-            const numericScore =
-                Number(score);
 
-            scores[skill] =
-                numericScore;
+        const buttonElement =
+            document.getElementById(
+                assessment.buttonId
+            );
 
-            completed++;
 
-            totalScore +=
-                numericScore;
+        if (isCompleted) {
+
+            const score =
+                Number(scoreValue) || 0;
+
+
+            completedAssessments.push({
+
+                role: assessment.role,
+
+                key: assessment.key,
+
+                score: score
+
+            });
+
+
+            totalScore += score;
+
+
+            if (statusElement) {
+
+                statusElement.textContent =
+                    "✓ Completed";
+
+                statusElement.classList.add(
+                    "completed"
+                );
+
+            }
+
+
+            if (buttonElement) {
+
+                buttonElement.textContent =
+                    "Retake Assessment →";
+
+            }
+
+
+        } else {
+
+            if (statusElement) {
+
+                statusElement.textContent =
+                    "Not Started";
+
+                statusElement.classList.remove(
+                    "completed"
+                );
+
+            }
+
+
+            if (buttonElement) {
+
+                buttonElement.textContent =
+                    "Take Assessment →";
+
+            }
 
         }
 
@@ -785,76 +1020,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    /* ================================
-       INDIVIDUAL SKILLS
-    ================================= */
-
-    function updateSkill(
-        scoreId,
-        progressId,
-        score
-    ) {
-
-        const scoreElement =
-            document.getElementById(scoreId);
-
-        const progressElement =
-            document.getElementById(progressId);
-
-
-        if (score !== undefined) {
-
-            scoreElement.textContent =
-                score + "%";
-
-            progressElement.style.width =
-                score + "%";
-
-        } else {
-
-            scoreElement.textContent =
-                "—";
-
-            progressElement.style.width =
-                "0%";
-
-        }
-
-    }
-
-
-    updateSkill(
-        "htmlcssScore",
-        "htmlcssProgress",
-        scores.htmlcss
-    );
-
-
-    updateSkill(
-        "javascriptScore",
-        "javascriptProgress",
-        scores.javascript
-    );
-
-
-    updateSkill(
-        "pythonScore",
-        "pythonProgress",
-        scores.python
-    );
-
-
-    updateSkill(
-        "cScore",
-        "cProgress",
-        scores.c
-    );
+    const completed =
+        completedAssessments.length;
 
 
 
-    /* ================================
-       OVERALL SCORE
-    ================================= */
+    /* =========================================
+       OVERALL SKILL SCORE
+    ========================================== */
 
     const skillScore =
         document.getElementById(
@@ -875,21 +1048,49 @@ document.addEventListener("DOMContentLoaded", function () {
                 totalScore / completed
             );
 
-        skillScore.textContent =
-            average + "%";
 
-        scoreMessage.textContent =
-            completed === 4
-                ? "Based on all four assessments"
-                : "Based on completed assessments";
+        if (skillScore) {
+
+            skillScore.textContent =
+                average + "%";
+
+        }
+
+
+        if (scoreMessage) {
+
+            scoreMessage.textContent =
+                completed === 4
+                    ? "Based on all assessments"
+                    : "Based on completed assessments";
+
+        }
+
+
+    } else {
+
+        if (skillScore) {
+
+            skillScore.textContent =
+                "—";
+
+        }
+
+
+        if (scoreMessage) {
+
+            scoreMessage.textContent =
+                "Complete assessments";
+
+        }
 
     }
 
 
 
-    /* ================================
-       ASSESSMENT STATUS
-    ================================= */
+    /* =========================================
+       ASSESSMENT COUNT
+    ========================================== */
 
     const assessmentStatus =
         document.getElementById(
@@ -903,32 +1104,40 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    assessmentStatus.textContent =
-        completed + "/4";
+    if (assessmentStatus) {
+
+        assessmentStatus.textContent =
+            completed + "/4";
+
+    }
 
 
-    if (completed === 0) {
+    if (assessmentMessage) {
 
-        assessmentMessage.textContent =
-            "Not completed";
+        if (completed === 0) {
 
-    } else if (completed < 4) {
+            assessmentMessage.textContent =
+                "Start your first assessment";
 
-        assessmentMessage.textContent =
-            "Keep going";
+        } else if (completed < 4) {
 
-    } else {
+            assessmentMessage.textContent =
+                "Keep going";
 
-        assessmentMessage.textContent =
-            "All completed";
+        } else {
+
+            assessmentMessage.textContent =
+                "All completed";
+
+        }
 
     }
 
 
 
-    /* ================================
+    /* =========================================
        CAREER STATUS
-    ================================= */
+    ========================================== */
 
     const careerStatus =
         document.getElementById(
@@ -936,28 +1145,32 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    if (completed === 4) {
+    if (careerStatus) {
 
-        careerStatus.textContent =
-            "● All assessments completed";
+        if (completed === 4) {
 
-    } else if (completed > 0) {
+            careerStatus.textContent =
+                "● All assessments completed";
 
-        careerStatus.textContent =
-            "● Assessment in progress";
+        } else if (completed > 0) {
 
-    } else {
+            careerStatus.textContent =
+                "● Assessment in progress";
 
-        careerStatus.textContent =
-            "● Assessment not completed";
+        } else {
+
+            careerStatus.textContent =
+                "● Assessment not completed";
+
+        }
 
     }
 
 
 
-    /* ================================
+    /* =========================================
        SKILLS TO IMPROVE
-    ================================= */
+    ========================================== */
 
     const skillsToImprove =
         document.getElementById(
@@ -965,40 +1178,178 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    if (completed === 0) {
+    if (skillsToImprove) {
 
-        skillsToImprove.textContent =
-            "—";
+        if (completed === 0) {
 
-    } else {
+            skillsToImprove.textContent =
+                "—";
 
-        let improveCount = 0;
+        } else {
 
+            const improveCount =
+                completedAssessments.filter(
+                    function (assessment) {
 
-        skills.forEach(function (skill) {
+                        return assessment.score < 70;
 
-            if (
-                scores[skill] !== undefined &&
-                scores[skill] < 70
-            ) {
-
-                improveCount++;
-
-            }
-
-        });
+                    }
+                ).length;
 
 
-        skillsToImprove.textContent =
-            improveCount;
+            skillsToImprove.textContent =
+                improveCount;
+
+        }
 
     }
 
 
 
-    /* ================================
+    /* =========================================
+       LATEST ASSESSMENT SKILLS
+    ========================================== */
+
+    const dashboardSkills =
+        document.getElementById(
+            "dashboardSkills"
+        );
+
+
+    const savedResult =
+        localStorage.getItem(
+            "acadx_assessment_result"
+        );
+
+
+    if (dashboardSkills) {
+
+        dashboardSkills.innerHTML =
+            "";
+
+
+        if (savedResult) {
+
+            try {
+
+                const result =
+                    JSON.parse(
+                        savedResult
+                    );
+
+
+                const skillScores =
+                    result.skills || {};
+
+
+                const skillNames =
+                    Object.keys(
+                        skillScores
+                    );
+
+
+                if (skillNames.length > 0) {
+
+                    skillNames.forEach(
+                        function (skillName) {
+
+                            const score =
+                                Number(
+                                    skillScores[
+                                        skillName
+                                    ]
+                                ) || 0;
+
+
+                            const skillItem =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            skillItem.className =
+                                "skill-item";
+
+
+                            skillItem.innerHTML = `
+
+                                <div class="skill-info">
+
+                                    <span>
+                                        ${skillName}
+                                    </span>
+
+                                    <strong>
+                                        ${score}%
+                                    </strong>
+
+                                </div>
+
+                                <div class="progress">
+
+                                    <div
+                                        class="progress-fill"
+                                        style="width:${score}%;">
+                                    </div>
+
+                                </div>
+
+                            `;
+
+
+                            dashboardSkills.appendChild(
+                                skillItem
+                            );
+
+                        }
+                    );
+
+
+                } else {
+
+                    dashboardSkills.innerHTML = `
+                        <p>
+                            Complete an assessment
+                            to see your skills.
+                        </p>
+                    `;
+
+                }
+
+
+            } catch (error) {
+
+                console.log(
+                    "Assessment result could not be loaded."
+                );
+
+                dashboardSkills.innerHTML = `
+                    <p>
+                        Complete an assessment
+                        to see your skills.
+                    </p>
+                `;
+
+            }
+
+        } else {
+
+            dashboardSkills.innerHTML = `
+                <p>
+                    Complete an assessment
+                    to see your skills.
+                </p>
+            `;
+
+        }
+
+    }
+
+
+
+    /* =========================================
        CAREER READINESS
-    ================================= */
+    ========================================== */
 
     const readinessScore =
         document.getElementById(
@@ -1018,41 +1369,100 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    if (completed === 4) {
+    if (completed > 0) {
 
         const average =
             Math.round(
-                totalScore / 4
+                totalScore / completed
             );
 
 
-        readinessScore.textContent =
-            average + "%";
+        if (readinessScore) {
+
+            readinessScore.textContent =
+                average + "%";
+
+        }
 
 
         if (average >= 80) {
 
-            readinessTitle.textContent =
-                "Excellent progress!";
+            if (readinessTitle) {
 
-            readinessText.textContent =
-                "You have built a strong foundation for your selected career.";
+                readinessTitle.textContent =
+                    "Excellent progress!";
+
+            }
+
+
+            if (readinessText) {
+
+                readinessText.textContent =
+                    "You have built a strong foundation for your selected career.";
+
+            }
+
 
         } else if (average >= 60) {
 
-            readinessTitle.textContent =
-                "Good progress!";
+            if (readinessTitle) {
 
-            readinessText.textContent =
-                "You have a good foundation, with a few areas that need improvement.";
+                readinessTitle.textContent =
+                    "Good progress!";
+
+            }
+
+
+            if (readinessText) {
+
+                readinessText.textContent =
+                    "You have a good foundation, with a few areas that need improvement.";
+
+            }
+
 
         } else {
 
+            if (readinessTitle) {
+
+                readinessTitle.textContent =
+                    "Keep improving!";
+
+            }
+
+
+            if (readinessText) {
+
+                readinessText.textContent =
+                    "Focused practice can help strengthen your skills.";
+
+            }
+
+        }
+
+
+    } else {
+
+        if (readinessScore) {
+
+            readinessScore.textContent =
+                "—";
+
+        }
+
+
+        if (readinessTitle) {
+
             readinessTitle.textContent =
-                "Keep improving!";
+                "Assessment required";
+
+        }
+
+
+        if (readinessText) {
 
             readinessText.textContent =
-                "Your assessment shows several areas where focused practice can help.";
+                "Complete your assessments to calculate your career readiness.";
 
         }
 
@@ -1060,42 +1470,118 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    /* ================================
-       ASSESSMENT NOTICE
-    ================================= */
+    /* =========================================
+       AREAS TO FOCUS ON
+    ========================================== */
 
-    const assessmentNotice =
+    const gapTags =
         document.getElementById(
-            "assessmentNotice"
+            "gapTags"
         );
 
 
-    const assessmentNoticeText =
-        document.getElementById(
-            "assessmentNoticeText"
-        );
+    if (gapTags) {
+
+        gapTags.innerHTML =
+            "";
 
 
-    if (completed === 4) {
+        if (savedResult) {
 
-        assessmentNotice.style.display =
-            "none";
+            try {
 
-    } else {
+                const result =
+                    JSON.parse(
+                        savedResult
+                    );
 
-        assessmentNotice.style.display =
-            "block";
 
-        assessmentNoticeText.textContent =
-            "Complete all four technical skill assessments to generate your personalized skill gap analysis.";
+                const skillScores =
+                    result.skills || {};
+
+
+                const weakSkills =
+                    Object.entries(
+                        skillScores
+                    )
+                    .filter(
+                        function (item) {
+
+                            return Number(
+                                item[1]
+                            ) < 70;
+
+                        }
+                    )
+                    .sort(
+                        function (a, b) {
+
+                            return Number(a[1]) -
+                                   Number(b[1]);
+
+                        }
+                    );
+
+
+                if (weakSkills.length > 0) {
+
+                    weakSkills.forEach(
+                        function (item) {
+
+                            const tag =
+                                document.createElement(
+                                    "span"
+                                );
+
+
+                            tag.textContent =
+                                item[0];
+
+
+                            gapTags.appendChild(
+                                tag
+                            );
+
+                        }
+                    );
+
+
+                } else {
+
+                    const tag =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    tag.textContent =
+                        "No major gaps";
+
+
+                    gapTags.appendChild(
+                        tag
+                    );
+
+                }
+
+
+            } catch (error) {
+
+                console.log(
+                    "Skill gap data could not be loaded."
+                );
+
+            }
+
+        }
 
     }
 
 
 
-    /* ================================
+    /* =========================================
        SKILL GAP BUTTON
-    ================================= */
+    ========================================== */
 
     const skillGapButton =
         document.getElementById(
@@ -1103,39 +1589,96 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    if (completed === 4) {
+    if (skillGapButton) {
 
-        skillGapButton.disabled =
-            false;
+        if (completed > 0) {
 
-        skillGapButton.style.opacity =
-            "1";
+            skillGapButton.disabled =
+                false;
 
-        skillGapButton.textContent =
-            "Explore Skill Gap →";
 
-        skillGapButton.onclick =
-            function () {
+            skillGapButton.style.opacity =
+                "1";
 
-                window.location.href =
-                    "skill-gap.html";
 
-            };
+            skillGapButton.textContent =
+                "Explore Skill Gap →";
 
-    } else {
 
-        skillGapButton.disabled =
-            true;
+            skillGapButton.onclick =
+                function () {
 
-        skillGapButton.style.opacity =
-            "0.6";
+                    window.location.href =
+                        "skill-gap.html";
 
-        skillGapButton.textContent =
-            "Complete All Assessments";
+                };
+
+
+        } else {
+
+            skillGapButton.disabled =
+                true;
+
+
+            skillGapButton.style.opacity =
+                "0.6";
+
+
+            skillGapButton.textContent =
+                "Complete Assessments";
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       LAST SKILL SPRINT SCORE
+    ========================================== */
+
+    const lastGameScore =
+        localStorage.getItem(
+            "acadx_game_score"
+        );
+
+
+    const lastGameScoreElement =
+        document.getElementById(
+            "lastGameScore"
+        );
+
+
+    if (
+        lastGameScore !== null &&
+        lastGameScoreElement
+    ) {
+
+        lastGameScoreElement.textContent =
+            lastGameScore + "%";
 
     }
 
 });
+
+
+
+/* =========================================
+   START / RETAKE ASSESSMENT
+========================================= */
+
+function startAssessment(role) {
+
+    localStorage.setItem(
+        "acadx_selected_role",
+        role
+    );
+
+
+    window.location.href =
+        "assessment.html";
+
+}
 
 </script>
 

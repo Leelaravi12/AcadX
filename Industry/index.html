@@ -5,9 +5,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>TalentMesh | Industry Portal</title>
+    <title>AcadX | Industry Portal</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==========================================
+           APPLICATIONS
+           ========================================== */
+
+        .applications-section {
+            padding: 70px 8%;
+        }
+
+        .applications-container {
+            margin-top: 30px;
+        }
+
+        .applications-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(59, 129, 120, 0.08);
+            border: 1px solid #e6efed;
+        }
+
+        .applications-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1150px;
+        }
+
+        .applications-table th {
+            text-align: left;
+            padding: 18px 20px;
+            background: #e8f3f1;
+            color: #263633;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .applications-table td {
+            padding: 18px 20px;
+            border-top: 1px solid #edf2f1;
+            color: #4b5b58;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .applications-table tbody tr:hover {
+            background: #fafcfb;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: #263633;
+        }
+
+        .application-role {
+            font-weight: 600;
+            color: #3b8178;
+        }
+
+        .application-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #e8f3f1;
+            color: #2f6f67;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .resume-name {
+            max-width: 220px;
+            word-break: break-word;
+        }
+
+        .application-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            min-width: 250px;
+        }
+
+        .application-action-btn {
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .review-btn {
+            background: #edf2f1;
+            color: #4b5b58;
+        }
+
+        .review-btn:hover {
+            background: #dfe9e7;
+        }
+
+        .accept-btn {
+            background: #e8f3f1;
+            color: #2f6f67;
+        }
+
+        .accept-btn:hover {
+            background: #d6ebe7;
+        }
+
+        .reject-btn {
+            background: #f8eeee;
+            color: #9a5555;
+        }
+
+        .reject-btn:hover {
+            background: #f2dddd;
+        }
+
+        .applications-loading,
+        .applications-empty,
+        .applications-error {
+            padding: 50px 20px;
+            text-align: center;
+            color: #687875;
+        }
+
+        .applications-error {
+            color: #a94442;
+        }
+
+        .refresh-applications {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .applications-section {
+                padding: 50px 5%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -17,14 +160,15 @@
     <header class="navbar">
 
         <div class="logo">
-            <span class="logo-mark">T</span>
-            <span>Talent<span class="green">Mesh</span></span>
+            <span class="logo-mark">A</span>
+            <span>Acad<span class="green">X</span></span>
         </div>
 
         <nav>
             <a href="#" class="active">Dashboard</a>
             <a href="#roles">Opportunities</a>
             <a href="#skills">Skills</a>
+            <a href="#applications">Applications</a>
         </nav>
 
         <span class="portal-label">
@@ -149,20 +293,22 @@
             <form id="roleForm">
 
                 <div class="form-grid">
-<div class="form-group">
 
-    <label>
-        Company Name
-    </label>
+                    <div class="form-group">
 
-    <input
-        type="text"
-        id="companyName"
-        placeholder="e.g. Google"
-        required>
+                        <label>
+                            Company Name
+                        </label>
 
-</div>
-                   
+                        <input
+                            type="text"
+                            id="companyName"
+                            placeholder="e.g. Google"
+                            required>
+
+                    </div>
+
+
                     <div class="form-group">
 
                         <label>
@@ -354,13 +500,97 @@
                 class="role-list">
 
                 <div class="empty-role">
-                    <h3>No opportunities yet</h3>
+
+                    <h3>
+                        No opportunities yet
+                    </h3>
 
                     <p>
                         Create your first industry opportunity
                         using the form above.
                     </p>
+
                 </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SKILL MATCH PREVIEW -->
+
+        <section
+            class="match-section"
+            id="skillMatch">
+
+            <div class="section-heading">
+
+                <p class="eyebrow">
+                    SKILL MAPPING
+                </p>
+
+                <h2>
+                    Industry Skill Match
+                </h2>
+
+                <p>
+                    Compare industry requirements with a student's current skills.
+                </p>
+
+            </div>
+
+            <div id="matchRoleList"></div>
+
+        </section>
+
+
+        <!-- ==========================================
+             APPLICATIONS
+             ========================================== -->
+
+        <section
+            class="applications-section"
+            id="applications">
+
+            <div class="section-heading">
+
+                <p class="eyebrow">
+                    STUDENT APPLICATIONS
+                </p>
+
+                <h2>
+                    Applications received
+                </h2>
+
+                <p>
+                    View students who have applied for your opportunities
+                    and manage their application status.
+                </p>
+
+            </div>
+
+
+            <div class="applications-container">
+
+                <div
+                    id="applicationsContent"
+                    class="applications-table-wrapper">
+
+                    <div class="applications-loading">
+                        Loading applications...
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="secondary-btn refresh-applications"
+                    onclick="loadApplications()">
+
+                    Refresh Applications
+
+                </button>
 
             </div>
 
@@ -369,33 +599,312 @@
     </main>
 
 
-    <!-- SKILL MATCH PREVIEW -->
-<section class="match-section" id="skillMatch">
-
-    <div class="section-heading">
-
-        <p class="eyebrow">
-            SKILL MAPPING
-        </p>
-
-        <h2>
-            Industry Skill Match
-        </h2>
-
-        <p>
-            Compare industry requirements with a student's current skills.
-        </p>
-
-    </div>
-
-    <!-- Match cards will be created automatically for each role -->
-    <div id="matchRoleList">
-
-    </div>
-
-</section>
-
     <script src="script.js"></script>
+
+
+    <script>
+
+        // ==========================================
+        // LOAD APPLICATIONS FROM BACKEND
+        // ==========================================
+
+        async function loadApplications() {
+
+            const container =
+                document.getElementById(
+                    "applicationsContent"
+                );
+
+            if (!container) return;
+
+            container.innerHTML = `
+                <div class="applications-loading">
+                    Loading applications...
+                </div>
+            `;
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/applications"
+                    );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Could not load applications."
+                    );
+
+                }
+
+                const applications =
+                    await response.json();
+
+
+                // No applications
+
+                if (
+                    !Array.isArray(applications) ||
+                    applications.length === 0
+                ) {
+
+                    container.innerHTML = `
+                        <div class="applications-empty">
+
+                            <h3>
+                                No applications yet
+                            </h3>
+
+                            <p>
+                                Applications submitted by students
+                                will appear here.
+                            </p>
+
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                // Applications table
+
+                let tableHTML = `
+
+                    <table class="applications-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Student</th>
+                                <th>Opportunity</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Resume</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+                `;
+
+
+                applications.forEach(
+                    application => {
+
+                        const date =
+                            application.created_at
+                                ? new Date(
+                                    application.created_at
+                                ).toLocaleDateString()
+                                : "-";
+
+
+                        const currentStatus =
+                            application.status ||
+                            "Submitted";
+
+
+                        tableHTML += `
+
+                            <tr>
+
+                                <td>
+                                    <span class="student-name">
+                                        ${escapeApplicationHTML(
+                                            application.name
+                                        )}
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="application-role">
+                                        ${escapeApplicationHTML(
+                                            application.opportunity_title
+                                        )}
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    ${escapeApplicationHTML(
+                                        application.email
+                                    )}
+                                </td>
+
+
+                                <td>
+                                    ${escapeApplicationHTML(
+                                        application.phone
+                                    )}
+                                </td>
+
+
+                                <td>
+                                    <span class="resume-name">
+                                        ${escapeApplicationHTML(
+                                            application.resume_name
+                                        )}
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="application-status">
+                                        ${escapeApplicationHTML(
+                                            currentStatus
+                                        )}
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    ${date}
+                                </td>
+
+
+                                <td>
+
+                                    <div class="application-actions">
+
+                                        <button
+                                            type="button"
+                                            class="application-action-btn review-btn"
+                                            onclick="updateApplicationStatus(
+                                                ${application.id},
+                                                'Under Review'
+                                            )">
+
+                                            Under Review
+
+                                        </button>
+
+
+                                        <button
+                                            type="button"
+                                            class="application-action-btn accept-btn"
+                                            onclick="updateApplicationStatus(
+                                                ${application.id},
+                                                'Accepted'
+                                            )">
+
+                                            Accept
+
+                                        </button>
+
+
+                                        <button
+                                            type="button"
+                                            class="application-action-btn reject-btn"
+                                            onclick="updateApplicationStatus(
+                                                ${application.id},
+                                                'Rejected'
+                                            )">
+
+                                            Reject
+
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        `;
+
+                    }
+                );
+
+
+                tableHTML += `
+
+                        </tbody>
+
+                    </table>
+
+                `;
+
+
+                container.innerHTML =
+                    tableHTML;
+
+
+            } catch (error) {
+
+                console.error(
+                    "Applications error:",
+                    error
+                );
+
+                container.innerHTML = `
+
+                    <div class="applications-error">
+
+                        <h3>
+                            Unable to load applications
+                        </h3>
+
+                        <p>
+                            Please make sure the backend server
+                            is running on port 5000.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // ==========================================
+        // ESCAPE USER DATA
+        // ==========================================
+
+        function escapeApplicationHTML(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "";
+
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        // ==========================================
+        // LOAD WHEN INDUSTRY PAGE OPENS
+        // ==========================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                loadApplications();
+
+            }
+        );
+
+    </script>
 
 </body>
 

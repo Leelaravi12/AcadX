@@ -1,420 +1,557 @@
-const editButton = document.querySelector(".edit-button");
-const editForm = document.querySelector("#edit-form");
-const saveButton = document.querySelector("#save-profile");
+document.addEventListener("DOMContentLoaded", () => {
 
-let profile = JSON.parse(localStorage.getItem("acadxProfile")) || {
-    name: "Student Name",
-    branch: "Computer Science & Engineering",
-    college: "College Name",
-    year: "2nd Year"
-};
+    /* =========================
+       PROFILE ELEMENTS
+    ========================== */
 
-function displayProfile() {
+    const profileCard = document.querySelector(".profile-card");
+    const editButton = document.querySelector(".edit-button");
+    const editForm = document.getElementById("edit-form");
+    const saveProfileButton = document.getElementById("save-profile");
 
-    document.querySelector(".profile-info h2").textContent =
-        profile.name;
+    const nameInput = document.getElementById("student-name");
+    const branchInput = document.getElementById("student-branch");
+    const collegeInput = document.getElementById("student-college");
+    const yearInput = document.getElementById("student-year");
 
-    document.querySelector(".profile-info p:nth-of-type(1)").textContent =
-        profile.branch;
+    /* =========================
+       EDIT PROFILE
+    ========================== */
 
-    document.querySelector(".profile-info p:nth-of-type(2)").textContent =
-        profile.college;
+    if (editButton && editForm) {
+        editButton.addEventListener("click", () => {
+            editForm.classList.toggle("profile-form-visible");
 
-    document.querySelector(".profile-info p:nth-of-type(3)").textContent =
-        profile.year;
+            const savedProfile = JSON.parse(
+                localStorage.getItem("acadxProfile") || "null"
+            );
 
-}
-
-displayProfile();
-
-
-editButton.addEventListener("click", function () {
-
-    editForm.style.display = "block";
-
-    document.querySelector("#student-name").value =
-        profile.name;
-
-    document.querySelector("#student-branch").value =
-        profile.branch;
-
-    document.querySelector("#student-college").value =
-        profile.college;
-
-    document.querySelector("#student-year").value =
-        profile.year;
-
-});
-
-
-saveButton.addEventListener("click", function () {
-
-    const name =
-        document.querySelector("#student-name").value.trim();
-
-    const branch =
-        document.querySelector("#student-branch").value.trim();
-
-    const college =
-        document.querySelector("#student-college").value.trim();
-
-    const year =
-        document.querySelector("#student-year").value.trim();
-
-    if (name === "") {
-
-        alert("Please enter your name.");
-
-        return;
+            if (savedProfile) {
+                nameInput.value = savedProfile.name || "";
+                branchInput.value = savedProfile.branch || "";
+                collegeInput.value = savedProfile.college || "";
+                yearInput.value = savedProfile.year || "";
+            }
+        });
     }
 
-    profile = {
-        name: name,
-        branch: branch,
-        college: college,
-        year: year
-    };
+    /* =========================
+       DISPLAY PROFILE
+    ========================== */
 
-    localStorage.setItem(
-        "acadxProfile",
-        JSON.stringify(profile)
-    );
+    function displayProfile() {
+        const savedProfile = JSON.parse(
+            localStorage.getItem("acadxProfile") || "null"
+        );
+
+        if (!savedProfile) return;
+
+        const profileName = profileCard?.querySelector(".profile-info h2");
+        const profileDetails = profileCard?.querySelector(".profile-info");
+
+        if (profileName) {
+            profileName.textContent = savedProfile.name || "Student Name";
+        }
+
+        if (profileDetails) {
+            const paragraphs = profileDetails.querySelectorAll("p");
+
+            if (paragraphs[0]) {
+                paragraphs[0].textContent =
+                    savedProfile.branch || "Computer Science & Engineering";
+            }
+
+            if (paragraphs[1]) {
+                paragraphs[1].textContent =
+                    savedProfile.college || "College Name";
+            }
+
+            if (paragraphs[2]) {
+                paragraphs[2].textContent =
+                    savedProfile.year || "1st Year";
+            }
+        }
+    }
 
     displayProfile();
 
-    editForm.style.display = "none";
+    /* =========================
+       SAVE PROFILE
+    ========================== */
 
-});
-const addSkillButton = document.querySelector("#add-skill-button");
-const newSkillInput = document.querySelector("#new-skill");
-const skillsContainer = document.querySelector("#skills-container");
+    if (saveProfileButton) {
+        saveProfileButton.addEventListener("click", async (event) => {
 
-let skills = JSON.parse(localStorage.getItem("acadxSkills")) || [
-    "Python",
-    "Java",
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "SQL",
-    "Git & GitHub"
-];
+            event.preventDefault();
 
-function displaySkills() {
+            const name = nameInput.value.trim();
+            const branch = branchInput.value.trim();
+            const college = collegeInput.value.trim();
+            const year = yearInput.value.trim();
 
-    skillsContainer.innerHTML = "";
+            if (!name) {
+                alert("Please enter your name.");
+                return;
+            }
 
-    skills.forEach(function (skill) {
+            if (!branch) {
+                alert("Please enter your branch.");
+                return;
+            }
 
-        const skillTag = document.createElement("span");
+            if (!college) {
+                alert("Please enter your college.");
+                return;
+            }
 
-        skillTag.classList.add("skill-tag");
+            if (!year) {
+                alert("Please enter your year.");
+                return;
+            }
 
-        skillTag.textContent = skill;
+            /* Save profile locally */
 
-        skillsContainer.appendChild(skillTag);
+            const profile = {
+                name: name,
+                branch: branch,
+                college: college,
+                year: year
+            };
 
-    });
+            localStorage.setItem(
+                "acadxProfile",
+                JSON.stringify(profile)
+            );
 
-}
+            localStorage.setItem(
+                "acadxName",
+                name
+            );
 
-displaySkills();
+            localStorage.setItem(
+                "acadxBranch",
+                branch
+            );
 
-addSkillButton.addEventListener("click", function () {
+            localStorage.setItem(
+                "acadxCollege",
+                college
+            );
 
-    const skill = newSkillInput.value.trim();
+            localStorage.setItem(
+                "acadxYear",
+                year
+            );
 
-    if (skill === "") {
-        alert("Please enter a skill.");
-        return;
+            localStorage.setItem(
+                "profileCompleted",
+                "true"
+            );
+
+            displayProfile();
+
+            if (editForm) {
+                editForm.classList.remove("profile-form-visible");
+            }
+
+            /* =========================
+               SAVE TO DATABASE
+            ========================== */
+
+            try {
+
+                const user = JSON.parse(
+                    localStorage.getItem("acadxUser") || "null"
+                );
+
+                const email =
+                    user?.email ||
+                    localStorage.getItem("acadxEmail") ||
+                    `${name.toLowerCase().replace(/\s+/g, ".")}@acadx.local`;
+
+                const response = await fetch(
+                    "http://localhost:5000/students",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            department: branch,
+                            year: year
+                        })
+                    }
+                );
+
+                if (response.ok) {
+
+                    const data = await response.json();
+
+                    if (data.studentId) {
+                        localStorage.setItem(
+                            "acadxStudentId",
+                            data.studentId
+                        );
+                    }
+
+                    console.log("Profile saved to database.");
+                } else {
+                    console.log(
+                        "Database save failed, but profile was saved locally."
+                    );
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Backend unavailable. Profile saved locally."
+                );
+
+            }
+
+            /* =========================
+               FINAL REDIRECT
+               SAVE PROFILE → DASHBOARD
+            ========================== */
+
+            alert("Profile saved successfully!");
+
+            window.location.replace("dashboard.html");
+        });
     }
 
-    skills.push(skill);
+    /* =========================
+       SKILLS
+    ========================== */
 
-    localStorage.setItem(
-        "acadxSkills",
-        JSON.stringify(skills)
+    const skillsContainer =
+        document.getElementById("skills-container");
+
+    const newSkillInput =
+        document.getElementById("new-skill");
+
+    const addSkillButton =
+        document.getElementById("add-skill-button");
+
+    let skills = JSON.parse(
+        localStorage.getItem("acadxSkills") || "null"
     );
+
+    if (!skills) {
+        skills = [
+            "Python",
+            "Java",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "SQL",
+            "Git & GitHub"
+        ];
+    }
+
+    function escapeHTML(value) {
+        const div = document.createElement("div");
+        div.textContent = value;
+        return div.innerHTML;
+    }
+
+    function displaySkills() {
+
+        if (!skillsContainer) return;
+
+        skillsContainer.innerHTML = "";
+
+        skills.forEach((skill) => {
+
+            const span = document.createElement("span");
+
+            span.className = "skill-tag";
+            span.textContent = skill;
+
+            skillsContainer.appendChild(span);
+        });
+    }
 
     displaySkills();
 
-    newSkillInput.value = "";
+    if (addSkillButton && newSkillInput) {
 
-});
+        addSkillButton.addEventListener("click", async () => {
 
+            const skill = newSkillInput.value.trim();
 
-const addProjectButton = document.querySelector("#add-project-button");
-const projectsContainer = document.querySelector("#projects-container");
+            if (!skill) {
+                alert("Please enter a skill.");
+                return;
+            }
 
-let projects = JSON.parse(localStorage.getItem("acadxProjects")) || [
-    {
-        title: "Food Waste Management System",
-        description: "A web platform that connects food donors with organizations to help reduce food wastage.",
-        technologies: ["HTML", "CSS", "JavaScript", "Firebase"]
-    }
-];
+            const exists = skills.some(
+                item => item.toLowerCase() === skill.toLowerCase()
+            );
 
-function displayProjects() {
+            if (exists) {
+                alert("This skill is already added.");
+                return;
+            }
 
-    projectsContainer.innerHTML = "";
+            skills.push(skill);
 
-    projects.forEach(function (project, index) {
+            localStorage.setItem(
+                "acadxSkills",
+                JSON.stringify(skills)
+            );
 
-        const projectCard = document.createElement("article");
+            displaySkills();
 
-        projectCard.classList.add("project-card");
+            newSkillInput.value = "";
 
-        projectCard.innerHTML = `
-            <h3>${project.title}</h3>
+            /* Save skill to database */
 
-            <p>${project.description}</p>
+            const studentId =
+                localStorage.getItem("acadxStudentId");
 
-            <div class="project-tech">
-                ${project.technologies
-                    .map(function (tech) {
-                        return `<span>${tech}</span>`;
-                    })
-                    .join("")}
-            </div>
+            if (studentId) {
 
-            <button class="project-button">
-                View Project
-            </button>
+                try {
 
-            <button class="edit-project-button" data-index="${index}">
-                Edit
-            </button>
+                    await fetch(
+                        `http://localhost:5000/students/${studentId}/skills`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                skillName: skill
+                            })
+                        }
+                    );
 
-            <button class="delete-project-button" data-index="${index}">
-                Delete
-            </button>
-        `;
+                } catch (error) {
 
-        projectsContainer.appendChild(projectCard);
+                    console.log(
+                        "Could not save skill to database."
+                    );
 
-    });
-
-}
-
-displayProjects();
-
-
-addProjectButton.addEventListener("click", function () {
-
-    const title =
-        document.querySelector("#project-title").value.trim();
-
-    const description =
-        document.querySelector("#project-description").value.trim();
-
-    const technologies =
-        document.querySelector("#project-technologies").value.trim();
-
-    if (title === "" || description === "") {
-
-        alert("Please enter the project title and description.");
-
-        return;
-    }
-
-    const technologyList = technologies
-        .split(",")
-        .map(function (tech) {
-            return tech.trim();
-        })
-        .filter(function (tech) {
-            return tech !== "";
+                }
+            }
         });
+    }
 
-    const newProject = {
-        title: title,
-        description: description,
-        technologies: technologyList
-    };
+    /* =========================
+       PROJECTS
+    ========================== */
 
-    projects.push(newProject);
+    const projectsContainer =
+        document.getElementById("projects-container");
 
-    localStorage.setItem(
-        "acadxProjects",
-        JSON.stringify(projects)
+    const addProjectButton =
+        document.getElementById("add-project-button");
+
+    const projectTitle =
+        document.getElementById("project-title");
+
+    const projectDescription =
+        document.getElementById("project-description");
+
+    const projectTechnologies =
+        document.getElementById("project-technologies");
+
+    let projects = JSON.parse(
+        localStorage.getItem("acadxProjects") || "null"
     );
+
+    if (!projects) {
+        projects = [
+            {
+                title: "Food Waste Management System",
+                description:
+                    "A web platform that connects food donors with organizations to help reduce food wastage.",
+                technologies:
+                    "HTML, CSS, JavaScript, Firebase"
+            }
+        ];
+    }
+
+    function displayProjects() {
+
+        if (!projectsContainer) return;
+
+        projectsContainer.innerHTML = "";
+
+        projects.forEach((project) => {
+
+            const article = document.createElement("article");
+
+            article.className = "project-card";
+
+            article.innerHTML = `
+                <h3>${escapeHTML(project.title)}</h3>
+
+                <p>
+                    ${escapeHTML(project.description)}
+                </p>
+
+                <div class="project-tech">
+                    ${project.technologies
+                        .split(",")
+                        .map(
+                            tech =>
+                                `<span>${escapeHTML(
+                                    tech.trim()
+                                )}</span>`
+                        )
+                        .join("")}
+                </div>
+
+                <button class="project-button">
+                    View Project
+                </button>
+            `;
+
+            projectsContainer.appendChild(article);
+        });
+    }
 
     displayProjects();
 
-    document.querySelector("#project-title").value = "";
-    document.querySelector("#project-description").value = "";
-    document.querySelector("#project-technologies").value = "";
+    if (addProjectButton) {
 
-});
-projectsContainer.addEventListener("click", function (event) {
+        addProjectButton.addEventListener("click", () => {
 
-    const index = event.target.dataset.index;
+            const title = projectTitle.value.trim();
+            const description = projectDescription.value.trim();
+            const technologies =
+                projectTechnologies.value.trim();
 
-    if (event.target.classList.contains("delete-project-button")) {
-
-        projects.splice(index, 1);
-
-        localStorage.setItem(
-            "acadxProjects",
-            JSON.stringify(projects)
-        );
-
-        displayProjects();
-    }
-
-
-    if (event.target.classList.contains("edit-project-button")) {
-
-        const project = projects[index];
-
-        const newTitle = prompt(
-            "Edit project title:",
-            project.title
-        );
-
-        if (newTitle === null) {
-            return;
-        }
-
-        const newDescription = prompt(
-            "Edit project description:",
-            project.description
-        );
-
-        if (newDescription === null) {
-            return;
-        }
-
-        project.title = newTitle.trim();
-        project.description = newDescription.trim();
-
-        localStorage.setItem(
-            "acadxProjects",
-            JSON.stringify(projects)
-        );
-
-        displayProjects();
-    }
-
-});
-    const addCertificateButton =
-    document.querySelector("#add-certificate-button");
-
-const certificationsContainer =
-    document.querySelector("#certifications-container");
-
-let certifications =
-    JSON.parse(localStorage.getItem("acadxCertifications")) || [
-        {
-            name: "Python Programming",
-            issuer: "Organization Name",
-            year: "2026",
-            link: ""
-        }
-    ];
-
-function displayCertifications() {
-
-    certificationsContainer.innerHTML = "";
-
-    certifications.forEach(function (certificate, index) {
-
-        const certificateCard =
-            document.createElement("div");
-
-        certificateCard.classList.add("certification-card");
-
-        certificateCard.innerHTML = `
-            <h3>${certificate.name}</h3>
-
-            <p>Issued by: ${certificate.issuer}</p>
-
-            <p>Year: ${certificate.year}</p>
-
-            ${
-                certificate.link
-                    ? `<a href="${certificate.link}" target="_blank">
-                        View Certificate
-                       </a>`
-                    : ""
+            if (!title || !description) {
+                alert("Please enter project title and description.");
+                return;
             }
 
-            <button
-                class="delete-certificate-button"
-                data-index="${index}">
-                Delete
-            </button>
-        `;
+            projects.push({
+                title: title,
+                description: description,
+                technologies:
+                    technologies || "Not specified"
+            });
 
-        certificationsContainer.appendChild(certificateCard);
+            localStorage.setItem(
+                "acadxProjects",
+                JSON.stringify(projects)
+            );
 
-    });
+            displayProjects();
 
-}
-
-displayCertifications();
-
-
-addCertificateButton.addEventListener("click", function () {
-
-    const name =
-        document.querySelector("#certificate-name").value.trim();
-
-    const issuer =
-        document.querySelector("#certificate-issuer").value.trim();
-
-    const year =
-        document.querySelector("#certificate-year").value.trim();
-
-    const link =
-        document.querySelector("#certificate-link").value.trim();
-
-    if (name === "" || issuer === "" || year === "") {
-
-        alert(
-            "Please enter the certificate name, issuer and year."
-        );
-
-        return;
+            projectTitle.value = "";
+            projectDescription.value = "";
+            projectTechnologies.value = "";
+        });
     }
 
-    const newCertificate = {
+    /* =========================
+       CERTIFICATIONS
+    ========================== */
 
-        name: name,
-        issuer: issuer,
-        year: year,
-        link: link
+    const certificationsContainer =
+        document.getElementById("certifications-container");
 
-    };
+    const addCertificateButton =
+        document.getElementById("add-certificate-button");
 
-    certifications.push(newCertificate);
+    const certificateName =
+        document.getElementById("certificate-name");
 
-    localStorage.setItem(
-        "acadxCertifications",
-        JSON.stringify(certifications)
+    const certificateIssuer =
+        document.getElementById("certificate-issuer");
+
+    const certificateYear =
+        document.getElementById("certificate-year");
+
+    const certificateLink =
+        document.getElementById("certificate-link");
+
+    let certifications = JSON.parse(
+        localStorage.getItem("acadxCertifications") || "null"
     );
+
+    if (!certifications) {
+        certifications = [
+            {
+                name: "Python Programming",
+                issuer: "Organization Name",
+                year: "2026",
+                link: ""
+            }
+        ];
+    }
+
+    function displayCertifications() {
+
+        if (!certificationsContainer) return;
+
+        certificationsContainer.innerHTML = "";
+
+        certifications.forEach((certificate) => {
+
+            const div = document.createElement("div");
+
+            div.className = "certification-card";
+
+            div.innerHTML = `
+                <h3>${escapeHTML(certificate.name)}</h3>
+
+                <p>
+                    Issued by:
+                    ${escapeHTML(certificate.issuer)}
+                </p>
+
+                <p>
+                    Year:
+                    ${escapeHTML(certificate.year)}
+                </p>
+
+                ${
+                    certificate.link
+                        ? `<button
+                            class="certificate-button"
+                            onclick="window.open('${encodeURIComponent(
+                                certificate.link
+                            )}', '_blank')">
+                            View Certificate
+                           </button>`
+                        : ""
+                }
+            `;
+
+            certificationsContainer.appendChild(div);
+        });
+    }
 
     displayCertifications();
 
-    document.querySelector("#certificate-name").value = "";
-    document.querySelector("#certificate-issuer").value = "";
-    document.querySelector("#certificate-year").value = "";
-    document.querySelector("#certificate-link").value = "";
+    if (addCertificateButton) {
 
-});
-certificationsContainer.addEventListener(
-    "click",
-    function (event) {
+        addCertificateButton.addEventListener("click", () => {
 
-        if (
-            event.target.classList.contains(
-                "delete-certificate-button"
-            )
-        ) {
+            const name = certificateName.value.trim();
+            const issuer = certificateIssuer.value.trim();
+            const year = certificateYear.value.trim();
+            const link = certificateLink.value.trim();
 
-            const index =
-                event.target.dataset.index;
+            if (!name || !issuer || !year) {
+                alert("Please fill in certificate name, issuer and year.");
+                return;
+            }
 
-            certifications.splice(index, 1);
+            certifications.push({
+                name: name,
+                issuer: issuer,
+                year: year,
+                link: link
+            });
 
             localStorage.setItem(
                 "acadxCertifications",
@@ -423,108 +560,90 @@ certificationsContainer.addEventListener(
 
             displayCertifications();
 
-        }
-
+            certificateName.value = "";
+            certificateIssuer.value = "";
+            certificateYear.value = "";
+            certificateLink.value = "";
+        });
     }
-);
+
+    /* =========================
+       ACHIEVEMENTS
+    ========================== */
+
+    const achievementsContainer =
+        document.getElementById("achievements-container");
+
     const addAchievementButton =
-    document.querySelector("#add-achievement-button");
+        document.getElementById("add-achievement-button");
 
-const achievementsContainer =
-    document.querySelector("#achievements-container");
+    const achievementTitle =
+        document.getElementById("achievement-title");
 
-let achievements =
-    JSON.parse(localStorage.getItem("acadxAchievements")) || [
-        {
-            title: "Hackathon Participation",
-            description:
-                "Participated in a technology hackathon and developed a solution for a real-world problem."
-        }
-    ];
+    const achievementDescription =
+        document.getElementById("achievement-description");
 
-function displayAchievements() {
+    let achievements = JSON.parse(
+        localStorage.getItem("acadxAchievements") || "null"
+    );
 
-    achievementsContainer.innerHTML = "";
-
-    achievements.forEach(function (achievement, index) {
-
-        const achievementCard =
-            document.createElement("div");
-
-        achievementCard.classList.add("achievement-card");
-
-        achievementCard.innerHTML = `
-            <h3>${achievement.title}</h3>
-
-            <p>${achievement.description}</p>
-
-            <button
-                class="delete-achievement-button"
-                data-index="${index}">
-                Delete
-            </button>
-        `;
-
-        achievementsContainer.appendChild(achievementCard);
-
-    });
-
-}
-
-displayAchievements();
-
-
-addAchievementButton.addEventListener("click", function () {
-
-    const title =
-        document.querySelector("#achievement-title").value.trim();
-
-    const description =
-        document.querySelector("#achievement-description").value.trim();
-
-    if (title === "" || description === "") {
-
-        alert(
-            "Please enter the achievement title and description."
-        );
-
-        return;
+    if (!achievements) {
+        achievements = [
+            {
+                title: "Hackathon Participation",
+                description:
+                    "Participated in a technology hackathon and developed a solution for a real-world problem."
+            }
+        ];
     }
 
-    const newAchievement = {
+    function displayAchievements() {
 
-        title: title,
-        description: description
+        if (!achievementsContainer) return;
 
-    };
+        achievementsContainer.innerHTML = "";
 
-    achievements.push(newAchievement);
+        achievements.forEach((achievement) => {
 
-    localStorage.setItem(
-        "acadxAchievements",
-        JSON.stringify(achievements)
-    );
+            const div = document.createElement("div");
+
+            div.className = "achievement-card";
+
+            div.innerHTML = `
+                <h3>${escapeHTML(achievement.title)}</h3>
+
+                <p>
+                    ${escapeHTML(achievement.description)}
+                </p>
+            `;
+
+            achievementsContainer.appendChild(div);
+        });
+    }
 
     displayAchievements();
 
-    document.querySelector("#achievement-title").value = "";
-    document.querySelector("#achievement-description").value = "";
+    if (addAchievementButton) {
 
-});
-achievementsContainer.addEventListener(
-    "click",
-    function (event) {
+        addAchievementButton.addEventListener("click", () => {
 
-        if (
-            event.target.classList.contains(
-                "delete-achievement-button"
-            )
-        ) {
+            const title =
+                achievementTitle.value.trim();
 
-            const index =
-                event.target.dataset.index;
+            const description =
+                achievementDescription.value.trim();
 
-            achievements.splice(index, 1);
+            if (!title || !description) {
+                alert(
+                    "Please enter achievement title and description."
+                );
+                return;
+            }
+
+            achievements.push({
+                title: title,
+                description: description
+            });
 
             localStorage.setItem(
                 "acadxAchievements",
@@ -533,7 +652,9 @@ achievementsContainer.addEventListener(
 
             displayAchievements();
 
-        }
-
+            achievementTitle.value = "";
+            achievementDescription.value = "";
+        });
     }
-);
+
+});

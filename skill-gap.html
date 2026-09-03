@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcadX - Skill Gap Analysis</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fafcfb;
+            color: #263633;
+        }
+
+        .navbar {
+            background: #ffffff;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #3b8178;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5b58;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #3b8178;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1150px;
+            margin: 40px auto;
+        }
+
+        .header {
+            margin-bottom: 28px;
+        }
+
+        .header h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+            color: #263633;
+        }
+
+        .header p {
+            color: #687875;
+            font-size: 16px;
+        }
+
+        .role-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 14px;
+            background: #e8f3f1;
+            color: #2f6f67;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .readiness-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(47, 111, 103, 0.08);
+        }
+
+        .section-title {
+            font-size: 21px;
+            color: #263633;
+            margin-bottom: 6px;
+        }
+
+        .section-subtitle {
+            color: #687875;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .readiness {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .score-box {
+            min-width: 125px;
+            text-align: center;
+            padding: 18px;
+            background: #e8f3f1;
+            border-radius: 15px;
+        }
+
+        .score {
+            font-size: 42px;
+            font-weight: bold;
+            color: #3b8178;
+        }
+
+        .score-label {
+            font-size: 13px;
+            color: #687875;
+            margin-top: 4px;
+        }
+
+        .progress-container {
+            flex: 1;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 9px;
+            font-size: 14px;
+            color: #687875;
+        }
+
+        .progress {
+            width: 100%;
+            height: 13px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #3b8178;
+            width: 0%;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+        }
+
+        #readinessText {
+            margin-top: 13px;
+            color: #4b5b58;
+            line-height: 1.5;
+        }
+
+        .skills-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(47, 111, 103, 0.08);
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13px;
+            color: #687875;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-strong {
+            background: #22c55e;
+        }
+
+        .legend-medium {
+            background: #f59e0b;
+        }
+
+        .legend-weak {
+            background: #ef4444;
+        }
+
+        .skill {
+            padding: 20px;
+            background: #f8fbfa;
+            border: 1px solid #e4eeec;
+            border-radius: 14px;
+            margin-bottom: 15px;
+        }
+
+        .skill:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            font-weight: bold;
+            font-size: 16px;
+            color: #263633;
+        }
+
+        .skill-score {
+            font-weight: bold;
+            font-size: 16px;
+            color: #3b8178;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .strong {
+            background: #22c55e;
+        }
+
+        .medium {
+            background: #f59e0b;
+        }
+
+        .weak {
+            background: #ef4444;
+        }
+
+        .skill-details {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #687875;
+            flex-wrap: wrap;
+        }
+
+        .status {
+            font-weight: 600;
+        }
+
+        .recommendations {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(47, 111, 103, 0.08);
+        }
+
+        .recommendation-intro {
+            color: #687875;
+            font-size: 14px;
+            margin-top: 7px;
+            margin-bottom: 20px;
+        }
+
+        .recommendation-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+        }
+
+        .recommendation-icon {
+            font-size: 18px;
+        }
+
+        .recommendation-item p {
+            color: #4b5b58;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .recommendation-item strong {
+            color: #263633;
+        }
+
+        .success-message {
+            padding: 18px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            color: #166534;
+            line-height: 1.5;
+        }
+
+        .button-container {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #3b8178;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: #2f6f67;
+        }
+
+        .secondary-button {
+            background: #edf2f1;
+            color: #3f514d;
+        }
+
+        .secondary-button:hover {
+            background: #dfe9e7;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 16px 5%;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 28px auto;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .readiness {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .score-box {
+                width: 100%;
+            }
+
+            .skills-card,
+            .readiness-card,
+            .recommendations {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">AcadX</div>
+
+    <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="student-profile.html">Profile</a>
+        <a href="game.html">Skill Sprint</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Skill Gap Analysis</h1>
+
+        <p>
+            Understand your current strengths and the skills you need to improve
+            for your career goal.
+        </p>
+
+        <div class="role-badge" id="roleText">
+            Analyzing your skills...
+        </div>
+    </div>
+
+    <div id="analysisContent">
+
+        <div class="readiness-card">
+
+            <h2 class="section-title">Career Readiness</h2>
+
+            <p class="section-subtitle">
+                Your current readiness compared with the expected skill levels
+                for your selected role.
+            </p>
+
+            <div class="readiness">
+
+                <div class="score-box">
+
+                    <div class="score" id="overallScore">
+                        0%
+                    </div>
+
+                    <div class="score-label">
+                        Overall readiness
+                    </div>
+
+                </div>
+
+                <div class="progress-container">
+
+                    <div class="progress-label">
+                        <span>Current readiness</span>
+                        <span id="progressValue">0%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            id="overallBar">
+                        </div>
+                    </div>
+
+                    <p id="readinessText"></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="skills-card">
+
+            <h2 class="section-title">
+                Your Skill Analysis
+            </h2>
+
+            <p class="section-subtitle">
+                See how your current performance compares with the expected
+                level for this role.
+            </p>
+
+            <div class="legend">
+
+                <div class="legend-item">
+                    <span class="legend-dot legend-strong"></span>
+                    Strong
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot legend-medium"></span>
+                    Needs improvement
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot legend-weak"></span>
+                    Skill gap
+                </div>
+
+            </div>
+
+            <div id="skillsContainer"></div>
+
+        </div>
+
+        <div class="recommendations">
+
+            <h2 class="section-title">
+                Priority Skills
+            </h2>
+
+            <p class="recommendation-intro">
+                Focus on these areas to become more prepared for
+                <strong id="recommendationRole">
+                    your selected role
+                </strong>.
+            </p>
+
+            <div
+                class="recommendation-list"
+                id="recommendationList">
+            </div>
+
+            <div class="button-container">
+
+                <a
+                    href="matching.html"
+                    class="button">
+                    Find Matching Opportunities →
+                </a>
+
+                <a
+                    href="dashboard.html"
+                    class="button secondary-button">
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const selectedRole =
+    localStorage.getItem("acadx_selected_role") || "Software Developer";
+
+document.getElementById("roleText").textContent =
+    "Target Role: " + selectedRole;
+
+document.getElementById("recommendationRole").textContent =
+    selectedRole;
+
+const roleRequirements = {
+
+    "Software Developer": {
+        "Python": 80,
+        "Web Development": 75,
+        "DSA": 80,
+        "Problem Solving": 80
+    },
+
+    "Data Analyst": {
+        "Python": 75,
+        "Web Development": 40,
+        "DSA": 50,
+        "Problem Solving": 75
+    },
+
+    "AI / ML Engineer": {
+        "Python": 85,
+        "Web Development": 40,
+        "DSA": 70,
+        "Problem Solving": 85
+    },
+
+    "Cloud Engineer": {
+        "Python": 65,
+        "Web Development": 60,
+        "DSA": 65,
+        "Problem Solving": 75
+    }
+
+};
+
+const assessmentData =
+    JSON.parse(
+        localStorage.getItem("acadx_assessment_result")
+    );
+
+let studentSkills = {};
+
+if (assessmentData && assessmentData.skills) {
+
+    studentSkills = assessmentData.skills;
+
+} else {
+
+    studentSkills = {
+
+        "Python":
+            Number(
+                localStorage.getItem("acadx_python_score")
+            ) || 0,
+
+        "Web Development":
+            Number(
+                localStorage.getItem("acadx_htmlcss_score")
+            ) || 0,
+
+        "DSA": 0,
+
+        "Problem Solving": 0
+
+    };
+
+}
+
+const requirements =
+    roleRequirements[selectedRole] ||
+    roleRequirements["Software Developer"];
+
+const skillsContainer =
+    document.getElementById("skillsContainer");
+
+const recommendationList =
+    document.getElementById("recommendationList");
+
+let totalStudentScore = 0;
+let totalRequiredScore = 0;
+let improvementSkills = [];
+
+Object.keys(requirements).forEach(skill => {
+
+    const studentScore =
+        Number(studentSkills[skill]) || 0;
+
+    const requiredScore =
+        requirements[skill];
+
+    const gap =
+        Math.max(
+            requiredScore - studentScore,
+            0
+        );
+
+    totalStudentScore +=
+        Math.min(
+            studentScore,
+            requiredScore
+        );
+
+    totalRequiredScore +=
+        requiredScore;
+
+    let status = "";
+    let className = "";
+
+    if (studentScore >= requiredScore) {
+
+        status =
+            "Strong — requirement met";
+
+        className =
+            "strong";
+
+    }
+
+    else if (
+        studentScore >=
+        requiredScore * 0.7
+    ) {
+
+        status =
+            "Needs improvement";
+
+        className =
+            "medium";
+
+        improvementSkills.push(skill);
+
+    }
+
+    else {
+
+        status =
+            "Skill gap detected";
+
+        className =
+            "weak";
+
+        improvementSkills.push(skill);
+
+    }
+
+    const skillHTML = `
+
+        <div class="skill">
+
+            <div class="skill-header">
+
+                <span class="skill-name">
+                    ${skill}
+                </span>
+
+                <span class="skill-score">
+                    ${studentScore}%
+                </span>
+
+            </div>
+
+            <div class="skill-bar">
+
+                <div
+                    class="skill-fill ${className}"
+                    style="width:${Math.min(studentScore, 100)}%">
+                </div>
+
+            </div>
+
+            <div class="skill-details">
+
+                <span>
+                    Current: ${studentScore}%
+                </span>
+
+                <span>
+                    Required: ${requiredScore}%
+                </span>
+
+                <span class="status">
+                    Gap: ${gap}% — ${status}
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+    skillsContainer.innerHTML +=
+        skillHTML;
+
+});
+
+const overallScore =
+    totalRequiredScore === 0
+        ? 0
+        : Math.round(
+            (
+                totalStudentScore /
+                totalRequiredScore
+            ) * 100
+        );
+
+document.getElementById("overallScore")
+    .textContent =
+    overallScore + "%";
+
+document.getElementById("progressValue")
+    .textContent =
+    overallScore + "%";
+
+document.getElementById("overallBar")
+    .style.width =
+    overallScore + "%";
+
+if (overallScore >= 80) {
+
+    document.getElementById("readinessText")
+        .textContent =
+        "You are well prepared for this role. Keep strengthening your skills and practical experience.";
+
+}
+
+else if (overallScore >= 60) {
+
+    document.getElementById("readinessText")
+        .textContent =
+        "You are on the right track, but some skills need improvement before you are fully prepared.";
+
+}
+
+else {
+
+    document.getElementById("readinessText")
+        .textContent =
+        "You have some important skill gaps. Focus on the priority areas below and keep practicing.";
+
+}
+
+if (improvementSkills.length === 0) {
+
+    recommendationList.innerHTML = `
+
+        <div class="success-message">
+
+            <strong>Excellent work! 🎉</strong><br>
+
+            You currently meet all the required skill levels
+            for ${selectedRole}.
+
+        </div>
+
+    `;
+
+}
+
+else {
+
+    improvementSkills.forEach(skill => {
+
+        const li =
+            document.createElement("div");
+
+        li.className =
+            "recommendation-item";
+
+        li.innerHTML = `
+
+            <div class="recommendation-icon">
+                🎯
+            </div>
+
+            <p>
+                <strong>${skill}</strong><br>
+                Improve your ${skill} skills to become more
+                competitive for ${selectedRole} opportunities.
+            </p>
+
+        `;
+
+        recommendationList.appendChild(li);
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

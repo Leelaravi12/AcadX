@@ -566,3 +566,25 @@ li {
     text-decoration: none;
     font-weight: 500;
 }
+
+.assessment-navigation {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 35px;
+    padding-bottom: 20px;
+}
+
+.assessment-button {
+    display: inline-block;
+    text-decoration: none;
+    background: #263b70;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.assessment-button:hover {
+    background: #1e2f5a;
+}

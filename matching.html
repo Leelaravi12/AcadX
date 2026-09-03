@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AcadX - Opportunity Matching</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fafcfb;
+            color: #263633;
+        }
+
+        .navbar {
+            background: #ffffff;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #3b8178;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5b58;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #3b8178;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1150px;
+            margin: 40px auto;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 34px;
+            color: #263633;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #687875;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .role-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 14px;
+            background: #e8f3f1;
+            color: #2f6f67;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .summary-card {
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(47, 111, 103, 0.08);
+        }
+
+        .summary-title {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #263633;
+        }
+
+        .summary-text {
+            color: #687875;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .opportunity {
+            background: #ffffff;
+            padding: 28px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(47, 111, 103, 0.08);
+            border: 1px solid #e4eeec;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .title {
+            font-size: 21px;
+            font-weight: bold;
+            color: #263633;
+            margin-bottom: 7px;
+        }
+
+        .company {
+            color: #687875;
+            font-size: 14px;
+        }
+
+        .match-box {
+            min-width: 125px;
+            padding: 12px 15px;
+            background: #e8f3f1;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .match {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3b8178;
+        }
+
+        .match-label {
+            font-size: 12px;
+            color: #687875;
+            margin-top: 3px;
+        }
+
+        .match-section {
+            margin-top: 22px;
+        }
+
+        .match-label-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #687875;
+        }
+
+        .match-bar {
+            width: 100%;
+            height: 11px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .match-fill {
+            height: 100%;
+            background: #3b8178;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+        }
+
+        .skills-section {
+            margin-top: 22px;
+        }
+
+        .skills-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #3f514d;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill {
+            background: #e8f3f1;
+            color: #2f6f67;
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .reason {
+            margin-top: 20px;
+            padding: 13px 15px;
+            background: #f8fbfa;
+            border: 1px solid #e4eeec;
+            border-radius: 10px;
+            color: #4b5b58;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 11px 17px;
+            background: #3b8178;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: #2f6f67;
+        }
+
+        .secondary-button {
+            background: #edf2f1;
+            color: #3f514d;
+        }
+
+        .secondary-button:hover {
+            background: #dfe9e7;
+        }
+
+        .empty {
+            background: #ffffff;
+            padding: 45px;
+            border-radius: 18px;
+            text-align: center;
+            color: #687875;
+            box-shadow: 0 5px 20px rgba(47, 111, 103, 0.08);
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 16px 5%;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 28px auto;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .top {
+                flex-direction: column;
+            }
+
+            .match-box {
+                width: 100%;
+            }
+
+            .opportunity,
+            .summary-card {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        AcadX
+    </div>
+
+    <div class="nav-links">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="student-profile.html">
+            Profile
+        </a>
+
+        <a href="skill-gap.html">
+            Skill Gap
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>
+            Recommended Opportunities
+        </h1>
+
+        <p
+            class="subtitle"
+            id="subtitle">
+            Finding opportunities that match your skills...
+        </p>
+
+        <div
+            class="role-badge"
+            id="roleBadge">
+            Career opportunities
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <h2 class="summary-title">
+            Opportunities matched for you
+        </h2>
+
+        <p class="summary-text">
+            These opportunities are ranked according to your current
+            skill profile. A higher match percentage means your current
+            skills are closer to the expected requirements.
+        </p>
+
+    </div>
+
+
+    <div id="opportunities"></div>
+
+</div>
+
+
+<script>
+
+
+const assessmentData =
+    JSON.parse(
+        localStorage.getItem("acadx_assessment_result")
+    );
+
+
+let studentSkills = {};
+
+
+if (assessmentData && assessmentData.skills) {
+
+    studentSkills =
+        assessmentData.skills;
+
+}
+
+else {
+
+    studentSkills = {
+
+        "Python":
+            Number(
+                localStorage.getItem("acadx_python_score")
+            ) || 0,
+
+        "Web Development":
+            Number(
+                localStorage.getItem("acadx_htmlcss_score")
+            ) || 0,
+
+        "DSA": 0,
+
+        "Problem Solving": 0
+
+    };
+
+}
+
+
+const selectedRole =
+    localStorage.getItem("acadx_selected_role")
+    || "Software Developer";
+
+
+document.getElementById("roleBadge")
+    .textContent =
+    "Target Role: " + selectedRole;
+
+
+const opportunities = [
+
+    {
+        id: 0,
+
+        title: "Software Developer Intern",
+        company: "Tech Company",
+
+        skills: {
+            "Python": 80,
+            "Web Development": 70,
+            "DSA": 75,
+            "Problem Solving": 80
+        }
+    },
+
+    {
+        id: 1,
+
+        title: "Data Analyst Intern",
+        company: "Analytics Company",
+
+        skills: {
+            "Python": 75,
+            "DSA": 50,
+            "Problem Solving": 70
+        }
+    },
+
+    {
+        id: 2,
+
+        title: "AI / ML Intern",
+        company: "AI Research Company",
+
+        skills: {
+            "Python": 85,
+            "DSA": 70,
+            "Problem Solving": 80
+        }
+    },
+
+    {
+        id: 3,
+
+        title: "Frontend Developer Intern",
+        company: "Software Company",
+
+        skills: {
+            "Web Development": 85,
+            "JavaScript": 75,
+            "Problem Solving": 65
+        }
+    },
+
+    {
+        id: 4,
+
+        title: "Cloud Engineering Intern",
+        company: "Cloud Services Company",
+
+        skills: {
+            "Python": 60,
+            "DSA": 60,
+            "Problem Solving": 70
+        }
+    }
+
+];
+
+
+function calculateMatch(student, required) {
+
+    const skills =
+        Object.keys(required);
+
+
+    if (skills.length === 0)
+        return 0;
+
+
+    let total = 0;
+
+
+    skills.forEach(skill => {
+
+        const studentScore =
+            Number(student[skill]) || 0;
+
+
+        const requiredScore =
+            Number(required[skill]);
+
+
+        const skillMatch =
+            Math.min(
+                studentScore / requiredScore,
+                1
+            ) * 100;
+
+
+        total += skillMatch;
+
+    });
+
+
+    return Math.round(
+        total / skills.length
+    );
+
+}
+
+
+const results =
+    opportunities.map(opportunity => {
+
+        const match =
+            calculateMatch(
+                studentSkills,
+                opportunity.skills
+            );
+
+
+        const matchedSkills = [];
+
+        const missingSkills = [];
+
+
+        Object.keys(opportunity.skills)
+            .forEach(skill => {
+
+                const studentScore =
+                    Number(studentSkills[skill]) || 0;
+
+
+                const requiredScore =
+                    opportunity.skills[skill];
+
+
+                if (
+                    studentScore >=
+                    requiredScore
+                ) {
+
+                    matchedSkills.push(skill);
+
+                }
+
+                else {
+
+                    missingSkills.push(skill);
+
+                }
+
+            });
+
+
+        return {
+
+            id: opportunity.id,
+
+            title: opportunity.title,
+
+            company: opportunity.company,
+
+            skills: opportunity.skills,
+
+            match: match,
+
+            matchedSkills: matchedSkills,
+
+            missingSkills: missingSkills
+
+        };
+
+    });
+
+
+results.sort(
+    (a, b) =>
+        b.match - a.match
+);
+
+
+const container =
+    document.getElementById(
+        "opportunities"
+    );
+
+
+results.forEach(opportunity => {
+
+
+    const card =
+        document.createElement(
+            "div"
+        );
+
+
+    card.className =
+        "opportunity";
+
+
+    const missingText =
+        opportunity.missingSkills.length > 0
+
+        ? "Skills to improve: " +
+          opportunity.missingSkills.join(", ")
+
+        : "You meet all the required skill levels for this opportunity.";
+
+
+    card.innerHTML = `
+
+        <div class="top">
+
+            <div>
+
+                <div class="title">
+                    ${opportunity.title}
+                </div>
+
+                <div class="company">
+                    ${opportunity.company}
+                </div>
+
+            </div>
+
+
+            <div class="match-box">
+
+                <div class="match">
+                    ${opportunity.match}%
+                </div>
+
+                <div class="match-label">
+                    Match
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="match-section">
+
+            <div class="match-label-row">
+
+                <span>
+                    Skill compatibility
+                </span>
+
+                <span>
+                    ${opportunity.match}%
+                </span>
+
+            </div>
+
+
+            <div class="match-bar">
+
+                <div
+                    class="match-fill"
+                    style="width:${opportunity.match}%">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="skills-section">
+
+            <div class="skills-title">
+                Required Skills
+            </div>
+
+
+            <div class="skills">
+
+                ${Object.keys(opportunity.skills)
+                    .map(skill =>
+                        `<span class="skill">
+                            ${skill}
+                        </span>`
+                    )
+                    .join("")}
+
+            </div>
+
+        </div>
+
+
+        <div class="reason">
+
+            ${missingText}
+
+        </div>
+
+
+        <div class="button-container">
+
+            <a
+                href="opportunity-details.html?id=${opportunity.id}"
+                class="button">
+                View Opportunity →
+            </a>
+
+        </div>
+
+    `;
+
+
+    container.appendChild(card);
+
+});
+
+
+document.getElementById("subtitle")
+    .textContent =
+    "Opportunities ranked according to your current skill profile.";
+
+
+</script>
+
+</body>
+
+</html>

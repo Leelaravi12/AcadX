@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AcadX - Opportunity Details</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .opportunity-details-page {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 60px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #3b8178;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: #2f6f67;
+        }
+
+        .details-header {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 8px 25px rgba(59, 129, 120, 0.10);
+            margin-bottom: 24px;
+        }
+
+        .role-badge {
+            display: inline-block;
+            background: #e8f3f1;
+            color: #3b8178;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .details-header h1 {
+            margin: 0 0 10px;
+            color: #263633;
+            font-size: 32px;
+        }
+
+        .company-name {
+            color: #687875;
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .match-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e8f3f1;
+            color: #2f6f67;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .details-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 8px 25px rgba(59, 129, 120, 0.08);
+            margin-bottom: 24px;
+        }
+
+        .details-card h2 {
+            margin-top: 0;
+            margin-bottom: 18px;
+            color: #263633;
+            font-size: 21px;
+        }
+
+        .details-card p {
+            color: #687875;
+            line-height: 1.7;
+        }
+
+        .info-item {
+            margin-bottom: 18px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            display: block;
+            color: #687875;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #263633;
+            font-weight: 600;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: #edf2f1;
+            color: #3b8178;
+            padding: 8px 13px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .matched-skill {
+            background: #e8f3f1;
+            color: #2f6f67;
+        }
+
+        .improve-skill {
+            background: #f1f3f2;
+            color: #687875;
+        }
+
+        .apply-button {
+            display: block;
+            width: 100%;
+            border: none;
+            background: #3b8178;
+            color: #ffffff;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .apply-button:hover {
+            background: #2f6f67;
+        }
+
+        .application-form {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e4eeec;
+        }
+
+        .application-form.show {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #3f514d;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #d9e5e2;
+            border-radius: 9px;
+            font-size: 14px;
+            color: #263633;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #3b8178;
+        }
+
+        .submit-button {
+            width: 100%;
+            border: none;
+            background: #3b8178;
+            color: #ffffff;
+            padding: 13px;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background: #2f6f67;
+        }
+
+        .application-success {
+            display: none;
+            margin-top: 18px;
+            padding: 14px;
+            background: #e8f3f1;
+            color: #2f6f67;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .application-success.show {
+            display: block;
+        }
+
+        .already-applied {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #e8f3f1;
+            color: #2f6f67;
+            border-radius: 9px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .already-applied.show {
+            display: block;
+        }
+
+        .empty-message {
+            text-align: center;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 50px 25px;
+            box-shadow: 0 8px 25px rgba(59, 129, 120, 0.08);
+        }
+
+        .empty-message h2 {
+            color: #263633;
+        }
+
+        .empty-message p {
+            color: #687875;
+            margin-bottom: 25px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #edf2f1;
+            color: #3b8178;
+            padding: 11px 18px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .details-header h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            AcadX
+        </a>
+
+        <div class="nav-links">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="student-profile.html">
+                Profile
+            </a>
+
+            <a href="skill-gap.html">
+                Skill Gap
+            </a>
+
+            <a href="matching.html">
+                Opportunities
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<main class="opportunity-details-page">
+
+    <a href="matching.html" class="back-link">
+        ← Back to Opportunities
+    </a>
+
+    <div id="opportunityContainer"></div>
+
+</main>
+
+
+<script>
+
+const opportunities = [
+
+    {
+        title: "Software Developer Intern",
+        company: "Tech Company",
+        role: "Software Developer",
+        duration: "6 Months",
+        location: "Bengaluru",
+        workMode: "Hybrid",
+
+        description:
+            "Work with a software development team to build, test and maintain applications while gaining practical experience with modern development tools and technologies.",
+
+        skills: [
+            "Python",
+            "Web Development",
+            "DSA",
+            "Problem Solving"
+        ]
+    },
+
+    {
+        title: "Data Analyst Intern",
+        company: "Analytics Company",
+        role: "Data Analyst",
+        duration: "3 Months",
+        location: "Bengaluru",
+        workMode: "Hybrid",
+
+        description:
+            "Analyze datasets, prepare reports and create meaningful visualizations to help teams make data-driven decisions.",
+
+        skills: [
+            "Python",
+            "DSA",
+            "Problem Solving"
+        ]
+    },
+
+    {
+        title: "AI / ML Intern",
+        company: "AI Research Company",
+        role: "AI / ML Engineer",
+        duration: "6 Months",
+        location: "Bengaluru",
+        workMode: "On-site",
+
+        description:
+            "Assist in developing machine learning solutions, preparing datasets and experimenting with AI models under the guidance of experienced engineers.",
+
+        skills: [
+            "Python",
+            "DSA",
+            "Problem Solving"
+        ]
+    },
+
+    {
+        title: "Frontend Developer Intern",
+        company: "Software Company",
+        role: "Software Developer",
+        duration: "4 Months",
+        location: "Remote",
+        workMode: "Remote",
+
+        description:
+            "Build responsive and user-friendly web interfaces while working closely with designers and backend developers.",
+
+        skills: [
+            "Web Development",
+            "JavaScript",
+            "Problem Solving"
+        ]
+    },
+
+    {
+        title: "Cloud Engineering Intern",
+        company: "Cloud Services Company",
+        role: "Cloud Engineer",
+        duration: "6 Months",
+        location: "Bengaluru",
+        workMode: "Hybrid",
+
+        description:
+            "Gain practical exposure to cloud infrastructure, virtualization, networking and cloud-based application deployment.",
+
+        skills: [
+            "Python",
+            "DSA",
+            "Problem Solving"
+        ]
+    }
+
+];
+
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const opportunityIndex =
+    parseInt(
+        params.get("id")
+    );
+
+
+const container =
+    document.getElementById(
+        "opportunityContainer"
+    );
+
+
+const assessmentResult =
+    JSON.parse(
+        localStorage.getItem(
+            "acadx_assessment_result"
+        )
+    ) || null;
+
+
+function getStudentSkills() {
+
+    if (
+        assessmentResult &&
+        assessmentResult.skills
+    ) {
+
+        return assessmentResult.skills;
+
+    }
+
+
+    return {
+
+        "Python":
+            Number(
+                localStorage.getItem(
+                    "acadx_python_score"
+                )
+            ) || 0,
+
+        "Web Development":
+            Number(
+                localStorage.getItem(
+                    "acadx_htmlcss_score"
+                )
+            ) || 0,
+
+        "DSA": 0,
+
+        "Problem Solving": 0
+
+    };
+
+}
+
+
+const studentSkills =
+    getStudentSkills();
+
+
+function calculateMatch(requiredSkills) {
+
+    if (
+        requiredSkills.length === 0
+    ) {
+
+        return 0;
+
+    }
+
+
+    let total = 0;
+
+
+    requiredSkills.forEach(
+        skill => {
+
+            const studentScore =
+                Number(
+                    studentSkills[skill]
+                ) || 0;
+
+
+            const skillMatch =
+                Math.min(
+                    studentScore / 100,
+                    1
+                ) * 100;
+
+
+            total += skillMatch;
+
+        }
+    );
+
+
+    return Math.round(
+        total / requiredSkills.length
+    );
+
+}
+
+
+function getMatchedSkills(requiredSkills) {
+
+    return requiredSkills.filter(
+        skill =>
+            Number(
+                studentSkills[skill]
+            ) >= 70
+    );
+
+}
+
+
+function getSkillsToImprove(requiredSkills) {
+
+    return requiredSkills.filter(
+        skill =>
+            Number(
+                studentSkills[skill]
+            ) < 70
+    );
+
+}
+
+
+if (
+    isNaN(opportunityIndex) ||
+    !opportunities[opportunityIndex]
+) {
+
+    container.innerHTML = `
+
+        <div class="empty-message">
+
+            <h2>
+                Opportunity Not Found
+            </h2>
+
+            <p>
+                We couldn't find the opportunity you're looking for.
+            </p>
+
+            <a
+                href="matching.html"
+                class="back-button">
+
+                Back to Opportunities
+
+            </a>
+
+        </div>
+
+    `;
+
+} else {
+
+
+    const opportunity =
+        opportunities[
+            opportunityIndex
+        ];
+
+
+    const matchPercentage =
+        calculateMatch(
+            opportunity.skills
+        );
+
+
+    const matchedSkills =
+        getMatchedSkills(
+            opportunity.skills
+        );
+
+
+    const skillsToImprove =
+        getSkillsToImprove(
+            opportunity.skills
+        );
+
+
+    const applicationKey =
+        "acadx_applied_" +
+        opportunityIndex;
+
+
+    const alreadyApplied =
+        localStorage.getItem(
+            applicationKey
+        ) === "true";
+
+
+    container.innerHTML = `
+
+        <section class="details-header">
+
+            <span class="role-badge">
+                ${opportunity.role}
+            </span>
+
+            <h1>
+                ${opportunity.title}
+            </h1>
+
+            <div class="company-name">
+                ${opportunity.company}
+            </div>
+
+            <div class="match-highlight">
+                ${matchPercentage}% Skill Match
+            </div>
+
+        </section>
+
+
+        <div class="details-grid">
+
+
+            <div>
+
+                <section class="details-card">
+
+                    <h2>
+                        About the Opportunity
+                    </h2>
+
+                    <p>
+                        ${opportunity.description}
+                    </p>
+
+                </section>
+
+
+                <section class="details-card">
+
+                    <h2>
+                        Required Skills
+                    </h2>
+
+                    <div class="skills-list">
+
+                        ${opportunity.skills
+                            .map(
+                                skill => `
+                                    <span class="skill-tag">
+                                        ${skill}
+                                    </span>
+                                `
+                            )
+                            .join("")
+                        }
+
+                    </div>
+
+                </section>
+
+
+                ${
+                    matchedSkills.length > 0
+                    ? `
+
+                    <section class="details-card">
+
+                        <h2>
+                            Skills You Match
+                        </h2>
+
+                        <div class="skills-list">
+
+                            ${matchedSkills
+                                .map(
+                                    skill => `
+                                        <span class="skill-tag matched-skill">
+                                            ✓ ${skill}
+                                        </span>
+                                    `
+                                )
+                                .join("")
+                            }
+
+                        </div>
+
+                    </section>
+
+                    `
+                    : ""
+                }
+
+
+                ${
+                    skillsToImprove.length > 0
+                    ? `
+
+                    <section class="details-card">
+
+                        <h2>
+                            Skills to Improve
+                        </h2>
+
+                        <div class="skills-list">
+
+                            ${skillsToImprove
+                                .map(
+                                    skill => `
+                                        <span class="skill-tag improve-skill">
+                                            ${skill}
+                                        </span>
+                                    `
+                                )
+                                .join("")
+                            }
+
+                        </div>
+
+                    </section>
+
+                    `
+                    : ""
+                }
+
+
+            </div>
+
+
+            <div>
+
+
+                <section class="details-card">
+
+                    <h2>
+                        Opportunity Information
+                    </h2>
+
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Company
+                        </span>
+
+                        <span class="info-value">
+                            ${opportunity.company}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Duration
+                        </span>
+
+                        <span class="info-value">
+                            ${opportunity.duration}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Location
+                        </span>
+
+                        <span class="info-value">
+                            ${opportunity.location}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            Work Mode
+                        </span>
+
+                        <span class="info-value">
+                            ${opportunity.workMode}
+                        </span>
+
+                    </div>
+
+
+                </section>
+
+
+                <section class="details-card">
+
+                    <h2>
+                        Your Match
+                    </h2>
+
+
+                    <p>
+
+                        Your current skill profile has a
+                        <strong>
+                            ${matchPercentage}%
+                        </strong>
+                        match with the required skills for
+                        this opportunity.
+
+                    </p>
+
+
+                    <br>
+
+
+                    <button
+                        class="apply-button"
+                        id="applyButton"
+                        onclick="showApplicationForm()">
+
+                        ${
+                            alreadyApplied
+                            ? "Application Submitted ✓"
+                            : "Apply Now →"
+                        }
+
+                    </button>
+
+
+                    <div
+                        class="already-applied ${
+                            alreadyApplied
+                            ? "show"
+                            : ""
+                        }"
+                        id="alreadyApplied">
+
+                        You have already submitted an application
+                        for this opportunity.
+
+                    </div>
+
+
+                    <div
+                        class="application-form"
+                        id="applicationForm">
+
+
+                        <h2>
+                            Application Form
+                        </h2>
+
+
+                        <div class="form-group">
+
+                            <label for="applicantName">
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="applicantName"
+                                placeholder="Enter your name"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="applicantEmail">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="applicantEmail"
+                                placeholder="Enter your email"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="applicantPhone">
+                                Phone
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="applicantPhone"
+                                placeholder="Enter your phone number"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="resume">
+                                Resume
+                            </label>
+
+                            <input
+                                type="file"
+                                id="resume"
+                                accept=".pdf,.doc,.docx">
+
+                        </div>
+
+
+                        <button
+                            class="submit-button"
+                            onclick="submitApplication()">
+
+                            Submit Application
+
+                        </button>
+
+
+                        <div
+                            class="application-success"
+                            id="applicationSuccess">
+
+                            ✓ Application submitted successfully!
+
+                            <br>
+
+                            Your application for
+                            <strong>
+                                ${opportunity.title}
+                            </strong>
+                            has been recorded.
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+function showApplicationForm() {
+
+    const alreadyApplied =
+        localStorage.getItem(
+            "acadx_applied_" +
+            opportunityIndex
+        ) === "true";
+
+
+    if (alreadyApplied) {
+        return;
+    }
+
+
+    const form =
+        document.getElementById(
+            "applicationForm"
+        );
+
+
+    if (form) {
+
+        form.classList.add("show");
+
+        form.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+}
+
+
+async function submitApplication() {
+
+    const name =
+        document.getElementById(
+            "applicantName"
+        ).value.trim();
+
+
+    const email =
+        document.getElementById(
+            "applicantEmail"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "applicantPhone"
+        ).value.trim();
+
+
+    const resume =
+        document.getElementById(
+            "resume"
+        ).files[0];
+
+
+    if (!name || !email || !phone) {
+
+        alert(
+            "Please fill in all required fields."
+        );
+
+        return;
+
+    }
+
+
+    if (!resume) {
+
+        alert(
+            "Please select your resume."
+        );
+
+        return;
+
+    }
+
+
+    const opportunity =
+        opportunities[
+            opportunityIndex
+        ];
+
+
+    const studentId =
+        localStorage.getItem(
+            "acadxStudentId"
+        );
+
+
+    const applicationData = {
+
+        studentId:
+            studentId
+                ? Number(studentId)
+                : null,
+
+        opportunityId:
+            opportunityIndex,
+
+        opportunityTitle:
+            opportunity.title,
+
+        name:
+            name,
+
+        email:
+            email,
+
+        phone:
+            phone,
+
+        resumeName:
+            resume.name
+
+    };
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://localhost:5000/applications",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            applicationData
+                        )
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Application submission failed."
+            );
+
+        }
+
+
+        localStorage.setItem(
+            "acadx_applied_" +
+            opportunityIndex,
+            "true"
+        );
+
+
+        const successMessage =
+            document.getElementById(
+                "applicationSuccess"
+            );
+
+
+        successMessage.classList.add(
+            "show"
+        );
+
+
+        const applyButton =
+            document.getElementById(
+                "applyButton"
+            );
+
+
+        applyButton.textContent =
+            "Application Submitted ✓";
+
+
+        applyButton.style.background =
+            "#2f6f67";
+
+
+        document.getElementById(
+            "alreadyApplied"
+        ).classList.add(
+            "show"
+        );
+
+
+        document.getElementById(
+            "applicationForm"
+        ).classList.remove(
+            "show"
+        );
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+
+        alert(
+            "Application submitted successfully!"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Application error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Could not submit application. Please try again."
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

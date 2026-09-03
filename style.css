@@ -4761,3 +4761,652 @@ footer {
     }
 
 }
+/* =========================================================
+   STUDENT PROFILE PAGE - ACADX TEAL THEME
+   ========================================================= */
+
+body:has(.skills-section) {
+    background: #f5f9f8;
+    color: #243532;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+
+body:has(.skills-section) header {
+    background: #ffffff;
+    padding: 28px 50px;
+    border-bottom: 1px solid #dce9e6;
+}
+
+body:has(.skills-section) header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #24413d;
+}
+
+body:has(.skills-section) header p {
+    margin: 6px 0 0;
+    color: #607773;
+}
+
+/* Main */
+
+body:has(.skills-section) main {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 0 25px;
+}
+
+/* Profile Card */
+
+body:has(.skills-section) .profile-card {
+    background: #ffffff;
+    border: 1px solid #dce9e6;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(45, 100, 92, 0.08);
+}
+
+body:has(.skills-section) .profile-info {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+body:has(.skills-section) .profile-avatar {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    background: #e5f2ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+body:has(.skills-section) .profile-info h2 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    color: #173c37;
+}
+
+body:has(.skills-section) .profile-info p {
+    margin: 5px 0;
+    color: #607773;
+}
+
+/* Buttons */
+
+body:has(.skills-section) .edit-button,
+body:has(.skills-section) .portfolio-button,
+body:has(.skills-section) .save-button,
+body:has(.skills-section) #add-skill-button,
+body:has(.skills-section) #add-project-button,
+body:has(.skills-section) #add-certificate-button,
+body:has(.skills-section) #add-achievement-button {
+    display: inline-block;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-top: 20px;
+    background: #327f78;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+body:has(.skills-section) .edit-button:hover,
+body:has(.skills-section) .portfolio-button:hover,
+body:has(.skills-section) .save-button:hover,
+body:has(.skills-section) #add-skill-button:hover,
+body:has(.skills-section) #add-project-button:hover,
+body:has(.skills-section) #add-certificate-button:hover,
+body:has(.skills-section) #add-achievement-button:hover {
+    background: #286b65;
+}
+
+body:has(.skills-section) .portfolio-button {
+    margin-left: 8px;
+}
+
+/* Edit Form */
+
+body:has(.skills-section) .edit-form {
+    display: none;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #dce9e6;
+}
+
+body:has(.skills-section) .edit-form h3 {
+    margin-top: 0;
+    color: #24413d;
+}
+
+body:has(.skills-section) .edit-form label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #344d49;
+}
+
+body:has(.skills-section) .edit-form input {
+    width: 100%;
+    max-width: 450px;
+    padding: 11px;
+    border: 1px solid #cbdcd8;
+    border-radius: 7px;
+    box-sizing: border-box;
+}
+
+body:has(.skills-section) .edit-form input:focus {
+    outline: none;
+    border-color: #327f78;
+    box-shadow: 0 0 0 3px rgba(50, 127, 120, 0.1);
+}
+
+/* General Sections */
+
+body:has(.skills-section) main > section:not(.profile-card) {
+    background: #ffffff;
+    border: 1px solid #dce9e6;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(45, 100, 92, 0.05);
+}
+
+body:has(.skills-section) main > section h2 {
+    margin-top: 0;
+    color: #173c37;
+    font-size: 24px;
+}
+
+body:has(.skills-section) .section-description {
+    color: #607773;
+}
+
+/* Skills */
+
+body:has(.skills-section) .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+body:has(.skills-section) .skill-tag {
+    background: #e5f2ef;
+    color: #28756e;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid #cfe5e1;
+}
+
+body:has(.skills-section) .add-skill {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+body:has(.skills-section) .add-skill input {
+    flex: 1;
+    max-width: 400px;
+    padding: 11px;
+    border: 1px solid #cbdcd8;
+    border-radius: 7px;
+}
+
+/* Education */
+
+body:has(.skills-section) .education-card {
+    background: #f7fbfa;
+    border: 1px solid #dce9e6;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+body:has(.skills-section) .education-card h3 {
+    margin-top: 0;
+    color: #24413d;
+}
+
+body:has(.skills-section) .education-card p {
+    color: #607773;
+}
+
+/* Projects */
+
+body:has(.skills-section) .projects-container {
+    display: grid;
+    gap: 18px;
+}
+
+body:has(.skills-section) .project-card {
+    background: #f7fbfa;
+    border: 1px solid #dce9e6;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+body:has(.skills-section) .project-card h3 {
+    margin-top: 0;
+    color: #24413d;
+}
+
+body:has(.skills-section) .project-card p {
+    color: #607773;
+    line-height: 1.6;
+}
+
+body:has(.skills-section) .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+body:has(.skills-section) .project-tech span {
+    background: #e5f2ef;
+    color: #28756e;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+body:has(.skills-section) .project-button,
+body:has(.skills-section) .certificate-button {
+    border: none;
+    background: #327f78;
+    color: #ffffff;
+    padding: 9px 15px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+body:has(.skills-section) .project-button:hover,
+body:has(.skills-section) .certificate-button:hover {
+    background: #286b65;
+}
+
+/* Add Forms */
+
+body:has(.skills-section) .add-project,
+body:has(.skills-section) .add-certification,
+body:has(.skills-section) .add-achievement {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #dce9e6;
+}
+
+body:has(.skills-section) .add-project input,
+body:has(.skills-section) .add-project textarea,
+body:has(.skills-section) .add-certification input,
+body:has(.skills-section) .add-achievement input,
+body:has(.skills-section) .add-achievement textarea {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    padding: 11px;
+    margin: 10px 0;
+    border: 1px solid #cbdcd8;
+    border-radius: 7px;
+    font-family: inherit;
+}
+
+body:has(.skills-section) .add-project textarea,
+body:has(.skills-section) .add-achievement textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Certifications */
+
+body:has(.skills-section) .certification-container {
+    display: grid;
+    gap: 18px;
+}
+
+body:has(.skills-section) .certification-card {
+    background: #f7fbfa;
+    border: 1px solid #dce9e6;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+body:has(.skills-section) .certification-card h3 {
+    margin-top: 0;
+    color: #24413d;
+}
+
+/* Achievements */
+
+body:has(.skills-section) #achievements-container {
+    display: grid;
+    gap: 18px;
+}
+
+body:has(.skills-section) .achievement-card {
+    background: #f7fbfa;
+    border: 1px solid #dce9e6;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+body:has(.skills-section) .achievement-card h3 {
+    margin-top: 0;
+    color: #24413d;
+}
+
+body:has(.skills-section) .achievement-card p {
+    color: #607773;
+    line-height: 1.6;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    body:has(.skills-section) main {
+        padding: 0 15px;
+        margin-top: 20px;
+    }
+
+    body:has(.skills-section) .profile-card {
+        padding: 20px;
+    }
+
+    body:has(.skills-section) .profile-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    body:has(.skills-section) .add-skill {
+        flex-direction: column;
+    }
+
+    body:has(.skills-section) .add-skill input {
+        max-width: none;
+    }
+
+    body:has(.skills-section) .portfolio-button {
+        margin-left: 0;
+    }
+}
+/* =========================================================
+   STUDENT PROFILE - EDIT FORM FIX
+   ========================================================= */
+
+body:has(.skills-section) #edit-form {
+    display: none;
+}
+
+body:has(.skills-section) #edit-form.profile-form-visible {
+    display: block;
+}
+/* =========================================================
+   ACADX PORTFOLIO PAGE
+   ========================================================= */
+
+body:has(.portfolio-page) {
+    margin: 0;
+    background: #f5f9f8;
+    color: #243532;
+    font-family: Arial, sans-serif;
+}
+
+/* Portfolio Navbar */
+
+.portfolio-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 50px;
+    background: #ffffff;
+    border-bottom: 1px solid #dce9e6;
+    box-shadow: 0 2px 10px rgba(45, 100, 92, 0.05);
+}
+
+.portfolio-logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #327f78;
+}
+
+.portfolio-navbar a {
+    text-decoration: none;
+    color: #327f78;
+    font-weight: 600;
+    padding: 9px 16px;
+    border: 1px solid #cfe5e1;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+.portfolio-navbar a:hover {
+    background: #e5f2ef;
+}
+
+/* Main Portfolio */
+
+.portfolio-page {
+    max-width: 1050px;
+    margin: 35px auto;
+    padding: 0 25px;
+}
+
+/* Portfolio Header */
+
+.portfolio-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: #ffffff;
+    border: 1px solid #dce9e6;
+    border-radius: 18px;
+    padding: 35px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(45, 100, 92, 0.08);
+}
+
+.portfolio-avatar {
+    width: 95px;
+    height: 95px;
+    min-width: 95px;
+    border-radius: 50%;
+    background: #e5f2ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+}
+
+.portfolio-header h1 {
+    margin: 0 0 10px;
+    color: #173c37;
+    font-size: 30px;
+}
+
+.portfolio-header p {
+    margin: 5px 0;
+    color: #607773;
+}
+
+/* Portfolio Sections */
+
+.portfolio-section {
+    background: #ffffff;
+    border: 1px solid #dce9e6;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(45, 100, 92, 0.05);
+}
+
+.portfolio-section h2 {
+    margin: 0 0 18px;
+    color: #173c37;
+    font-size: 24px;
+    border-bottom: 2px solid #e5f2ef;
+    padding-bottom: 12px;
+}
+
+.portfolio-section p {
+    color: #607773;
+    line-height: 1.7;
+}
+
+/* Skills */
+
+.portfolio-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.portfolio-skills span {
+    display: inline-block;
+    background: #e5f2ef;
+    color: #28756e;
+    border: 1px solid #cfe5e1;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Projects */
+
+#portfolio-projects {
+    display: grid;
+    gap: 16px;
+}
+
+#portfolio-projects > div,
+#portfolio-projects > article {
+    background: #f7fbfa;
+    border: 1px solid #dce9e6;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+#portfolio-projects h3 {
+    margin-top: 0;
+    color: #24413d;
+}
+
+#portfolio-projects p {
+    color: #607773;
+    line-height: 1.6;
+}
+
+#portfolio-projects span {
+    display: inline-block;
+    background: #e5f2ef;
+    color: #28756e;
+    padding: 5px 10px;
+    margin: 4px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+/* Certifications */
+
+#portfolio-certifications {
+    display: grid;
+    gap: 16px;
+}
+
+#portfolio-certifications > div,
+#portfolio-certifications > article {
+    background: #f7fbfa;
+    border: 1px solid #dce9e6;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+#portfolio-certifications h3 {
+    margin-top: 0;
+    color: #24413d;
+}
+
+#portfolio-certifications p {
+    color: #607773;
+}
+
+/* Achievements */
+
+#portfolio-achievements {
+    display: grid;
+    gap: 16px;
+}
+
+#portfolio-achievements > div,
+#portfolio-achievements > article {
+    background: #f7fbfa;
+    border: 1px solid #dce9e6;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+#portfolio-achievements h3 {
+    margin-top: 0;
+    color: #24413d;
+}
+
+#portfolio-achievements p {
+    color: #607773;
+    line-height: 1.6;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .portfolio-navbar {
+        padding: 15px 20px;
+    }
+
+    .portfolio-logo {
+        font-size: 24px;
+    }
+
+    .portfolio-navbar a {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+
+    .portfolio-page {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    .portfolio-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 25px;
+    }
+
+    .portfolio-avatar {
+        width: 75px;
+        height: 75px;
+        min-width: 75px;
+        font-size: 35px;
+    }
+
+    .portfolio-header h1 {
+        font-size: 26px;
+    }
+
+    .portfolio-section {
+        padding: 20px;
+    }
+}

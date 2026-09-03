@@ -4,7 +4,9 @@
 // =========================================
 
 
+// =========================================
 // SHOW SIGN UP
+// =========================================
 
 function showSignup() {
 
@@ -17,7 +19,9 @@ function showSignup() {
 }
 
 
+// =========================================
 // SHOW LOGIN
+// =========================================
 
 function showLogin() {
 
@@ -30,27 +34,37 @@ function showLogin() {
 }
 
 
+// =========================================
 // SIGN UP
+// =========================================
 
 document.getElementById("signupForm")
     .addEventListener("submit", function(event) {
 
         event.preventDefault();
 
+
         const name =
-            document.getElementById("signupName").value.trim();
+            document.getElementById("signupName")
+                .value
+                .trim();
 
         const email =
-            document.getElementById("signupEmail").value.trim();
+            document.getElementById("signupEmail")
+                .value
+                .trim();
 
         const password =
-            document.getElementById("signupPassword").value;
+            document.getElementById("signupPassword")
+                .value;
 
         const message =
             document.getElementById("signupMessage");
 
 
-        // Check existing account
+        // =====================================
+        // CHECK EXISTING ACCOUNT
+        // =====================================
 
         const existingUser =
             localStorage.getItem("acadxUser");
@@ -61,22 +75,30 @@ document.getElementById("signupForm")
             const user =
                 JSON.parse(existingUser);
 
+
             if (user.email === email) {
 
                 message.textContent =
                     "An account with this email already exists. Please login.";
 
+                message.style.color = "#b45309";
+
                 return;
             }
+
         }
 
 
-        // Save user
+        // =====================================
+        // SAVE USER
+        // =====================================
 
         const user = {
+
             name: name,
             email: email,
             password: password
+
         };
 
 
@@ -86,59 +108,105 @@ document.getElementById("signupForm")
         );
 
 
-        message.textContent =
-            "Account created successfully! Please login.";
+        // =====================================
+        // SAVE STUDENT NAME
+        // =====================================
 
-        message.style.color = "#263b70";
+        localStorage.setItem(
+            "acadxName",
+            name
+        );
+
+
+        // =====================================
+        // NEW USER = PROFILE NOT COMPLETED
+        // =====================================
+
+        localStorage.removeItem(
+            "profileCompleted"
+        );
+
+
+        // =====================================
+        // MARK USER AS LOGGED IN
+        // =====================================
+
+        localStorage.setItem(
+            "acadxLoggedIn",
+            "true"
+        );
+
+
+        message.textContent =
+            "Account created successfully!";
+
+        message.style.color =
+            "#263b70";
 
 
         // Clear form
 
-        document.getElementById("signupForm").reset();
+        document.getElementById(
+            "signupForm"
+        ).reset();
 
 
-        // Switch to login
+        // =====================================
+        // NEW USER GOES TO PROFILE
+        // =====================================
 
         setTimeout(function() {
 
-            showLogin();
+            window.location.href =
+                "student-profile.html";
 
-        }, 1000);
+        }, 700);
 
     });
 
 
+// =========================================
 // LOGIN
+// =========================================
 
 document.getElementById("loginForm")
     .addEventListener("submit", function(event) {
 
         event.preventDefault();
 
+
         const email =
-            document.getElementById("loginEmail").value.trim();
+            document.getElementById("loginEmail")
+                .value
+                .trim();
 
         const password =
-            document.getElementById("loginPassword").value;
+            document.getElementById("loginPassword")
+                .value;
 
         const message =
             document.getElementById("loginMessage");
 
 
-        // Get registered user
+        // =====================================
+        // GET REGISTERED USER
+        // =====================================
 
         const savedUser =
             localStorage.getItem("acadxUser");
 
 
-        // No account
+        // =====================================
+        // NO ACCOUNT
+        // =====================================
 
         if (!savedUser) {
 
             message.textContent =
                 "Account not found. Please sign up first.";
 
-            message.style.color = "#b45309";
+            message.style.color =
+                "#b45309";
 
             return;
         }
@@ -148,33 +216,41 @@ document.getElementById("loginForm")
             JSON.parse(savedUser);
 
 
-        // Wrong email
+        // =====================================
+        // WRONG EMAIL
+        // =====================================
 
         if (user.email !== email) {
 
             message.textContent =
                 "Account not found. Please sign up first.";
 
-            message.style.color = "#b45309";
+            message.style.color =
+                "#b45309";
 
             return;
         }
 
 
-        // Wrong password
+        // =====================================
+        // WRONG PASSWORD
+        // =====================================
 
         if (user.password !== password) {
 
             message.textContent =
                 "Incorrect password. Please try again.";
 
-            message.style.color = "#b91c1c";
+            message.style.color =
+                "#b91c1c";
 
             return;
         }
 
 
-        // Successful login
+        // =====================================
+        // SUCCESSFUL LOGIN
+        // =====================================
 
         localStorage.setItem(
             "acadxLoggedIn",
@@ -191,27 +267,46 @@ document.getElementById("loginForm")
         message.textContent =
             "Login successful!";
 
-        message.style.color = "#263b70";
+        message.style.color =
+            "#263b70";
 
 
-        // Go to dashboard
+        // =====================================
+        // CHECK PROFILE
+        // =====================================
 
         setTimeout(function() {
 
-            if (localStorage.getItem("profileCompleted") === "true") {
+            const profileCompleted =
+                localStorage.getItem(
+                    "profileCompleted"
+                );
 
-    window.location.href = "dashboard.html";
 
-} else {
+            if (profileCompleted === "true") {
 
-    window.location.href = "student-profile.html";
+                // Returning student
+                window.location.href =
+                    "dashboard.html";
 
-}
+            } else {
+
+                // New / incomplete student
+                window.location.href =
+                    "student-profile.html";
+
+            }
+
         }, 700);
 
     });
 
-    function continueWithGoogle() {
+
+// =========================================
+// GOOGLE LOGIN
+// =========================================
+
+function continueWithGoogle() {
 
     alert(
         "Google sign-in will be connected when authentication is integrated."
