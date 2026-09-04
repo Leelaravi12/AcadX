@@ -15,7 +15,6 @@
 <body>
 
 <header class="navbar">
-
     <div class="logo">
         <span class="logo-box">A</span>
         <span class="logo-name">AcadX</span>
@@ -36,7 +35,7 @@
             Skills
         </a>
 
-        <a href="opportunities.html">
+        <a href="matching.html">
             Opportunities
         </a>
     </nav>
@@ -623,8 +622,7 @@
 
             <button
                 class="text-button"
-                onclick="window.location.href='opportunities.html'">
-
+                onclick="window.location.href='matching.html?id=${opportunity.id}'"
                 View All →
 
             </button>
@@ -633,131 +631,8 @@
 
 
         <div class="opportunity-grid">
-
-
-            <div class="opportunity">
-
-                <span class="opportunity-label">
-                    INTERNSHIP
-                </span>
-
-                <h3>
-                    Frontend Development Intern
-                </h3>
-
-                <p>
-                    Web Development • Remote
-                </p>
-
-                <div class="opportunity-skills">
-
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>JavaScript</span>
-
-                </div>
-
-
-                <div class="match">
-
-                    <strong>
-                        86% Match
-                    </strong>
-
-                    <button
-                        onclick="window.location.href='opportunities.html'">
-
-                        View Opportunity
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="opportunity">
-
-                <span class="opportunity-label">
-                    INTERNSHIP
-                </span>
-
-                <h3>
-                    UI/UX Design Intern
-                </h3>
-
-                <p>
-                    Product Design • Bengaluru
-                </p>
-
-                <div class="opportunity-skills">
-
-                    <span>UI Design</span>
-                    <span>Figma</span>
-
-                </div>
-
-
-                <div class="match">
-
-                    <strong>
-                        74% Match
-                    </strong>
-
-                    <button
-                        onclick="window.location.href='opportunities.html'">
-
-                        View Opportunity
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="opportunity">
-
-                <span class="opportunity-label">
-                    PROJECT
-                </span>
-
-                <h3>
-                    Web Development Project
-                </h3>
-
-                <p>
-                    Student Project • Collaborative
-                </p>
-
-                <div class="opportunity-skills">
-
-                    <span>HTML</span>
-                    <span>JavaScript</span>
-
-                </div>
-
-
-                <div class="match">
-
-                    <strong>
-                        81% Match
-                    </strong>
-
-                    <button
-                        onclick="window.location.href='opportunities.html'">
-
-                        View Opportunity
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
+        <div  id ="opportunityGrid"></div>
+         </div>
 
     </section>
 
@@ -779,8 +654,110 @@
 
 
 <script>
+async function loadOpportunities() {
 
+    const opportunityGrid =
+        document.getElementById("opportunityGrid");
+
+    if (!opportunityGrid) return;
+
+    try {
+
+        const response =
+            await fetch("http://localhost:5000/opportunities");
+
+        if (!response.ok) {
+            throw new Error("Failed to load opportunities");
+        }
+
+        const opportunities =
+            await response.json();
+
+        opportunityGrid.innerHTML = "";
+
+        if (opportunities.length === 0) {
+
+            opportunityGrid.innerHTML = `
+                <p>No opportunities available yet.</p>
+            `;
+
+            return;
+        }
+
+        opportunities.slice(0, 3).forEach(opportunity => {
+
+            const card =
+                document.createElement("div");
+
+            card.className = "opportunity";
+
+            const skills =
+                opportunity.skills
+                    .map(skill => `
+                        <span>
+                            ${skill.name || skill}
+                        </span>
+                    `)
+                    .join("");
+
+            card.innerHTML = `
+
+                <span class="opportunity-label">
+                    ${opportunity.type}
+                </span>
+
+                <h3>
+                    ${opportunity.title}
+                </h3>
+
+                <p>
+                    ${opportunity.company}
+                    •
+                    ${opportunity.location}
+                </p>
+
+                <div class="opportunity-skills">
+                    ${skills}
+                </div>
+
+                <div class="match">
+
+                    <strong>
+                        New Opportunity
+                    </strong>
+
+                    <button
+                        onclick="window.location.href='opportunity-details.html'">
+
+                        View Opportunity
+
+                    </button>
+
+                </div>
+
+            `;
+
+            opportunityGrid.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "OPPORTUNITY LOAD ERROR:",
+            error
+        );
+
+        opportunityGrid.innerHTML = `
+            <p>
+                Could not load opportunities.
+                Make sure the backend is running.
+            </p>
+        `;
+    }
+}
 document.addEventListener("DOMContentLoaded", function () {
+    loadOpportunities();
 
     /* =========================================
        PROFILE DATA

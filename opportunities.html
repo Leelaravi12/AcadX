@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AcadX - Opportunities</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        nav {
+            background: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav h2 {
+            margin: 0;
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #374151;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        #opportunityGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .company {
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .skill {
+            background: #e8f1ff;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>AcadX</h2>
+
+        <div>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="student-profile.html">Profile</a>
+            <a href="skill-gap.html">Skill Gap</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <h1>Recommended Opportunities</h1>
+
+        <p class="subtitle">
+            Opportunities ranked according to your current skill profile.
+        </p>
+
+        <div id="opportunityGrid">
+            <p>Loading opportunities...</p>
+        </div>
+
+    </main>
+
+    <script>
+
+        async function loadOpportunities() {
+
+            const opportunityGrid =
+                document.getElementById("opportunityGrid");
+
+            try {
+
+                const response =
+                    await fetch("/opportunities");
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Server returned " + response.status
+                    );
+                }
+
+                const opportunities =
+                    await response.json();
+
+                opportunityGrid.innerHTML = "";
+
+                if (opportunities.length === 0) {
+
+                    opportunityGrid.innerHTML =
+                        "<p>No opportunities available yet.</p>";
+
+                    return;
+                }
+
+                opportunities.forEach(opportunity => {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className = "card";
+
+                    const skills =
+                        Array.isArray(opportunity.skills)
+                            ? opportunity.skills
+                            : [];
+
+                    card.innerHTML = `
+                        <h2>${opportunity.title || "Untitled Opportunity"}</h2>
+
+                        <div class="company">
+                            ${opportunity.company || "Company"}
+                        </div>
+
+                        <p>
+                            <strong>Type:</strong>
+                            ${opportunity.type || "N/A"}
+                        </p>
+
+                        <p>
+                            <strong>Location:</strong>
+                            ${opportunity.location || "N/A"}
+                        </p>
+
+                        <p>
+                            <strong>Duration:</strong>
+                            ${opportunity.duration || "N/A"}
+                        </p>
+
+                        <p>
+                            ${opportunity.description || ""}
+                        </p>
+
+                        <div class="skills">
+    ${
+        skills.map(skill => {
+            if (typeof skill === "object") {
+                return `<span class="skill">${skill.name} - ${skill.level}</span>`;
+            }
+
+            return `<span class="skill">${skill}</span>`;
+        }).join("")
+    }
+</div>
+
+                        <a
+                            class="apply-btn"
+                            href="opportunity-details.html?id=${opportunity.id}"
+                        >
+                            View Opportunity
+                        </a>
+                    `;
+
+                    opportunityGrid.appendChild(card);
+
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "LOAD OPPORTUNITIES ERROR:",
+                    error
+                );
+
+                opportunityGrid.innerHTML = `
+                    <div class="error">
+                        Unable to load opportunities.
+                        <br><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        loadOpportunities();
+
+    </script>
+
+</body>
+
+</html>
