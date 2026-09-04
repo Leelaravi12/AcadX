@@ -1,8 +1,8 @@
 // backend/server.js
 
 const express = require("express");
-const db = require("./database");
-
+const Database =require("better-sqlite3");
+const db = new Database("acadx.db")
 const app = express();
 
 app.use(express.json());
@@ -545,7 +545,7 @@ app.get(
 );
 
 // ==========================================
-// OPPORTUNITIES
+// OPPORTUNITIESz
 // ==========================================
 
 // Publish opportunity
@@ -847,30 +847,20 @@ app.get("/applications", (req, res) => {
 // UPDATE APPLICATION STATUS
 // ==========================================
 
-app.put(
+app.get(
     "/applications/:applicationId/status",
     (req, res) => {
 
         const applicationId =
             Number(req.params.applicationId);
-
-        const { status } = req.body;
-
-        const allowedStatuses = [
+            console.log("STATUS REQUESTID:",applicationId);
+         const allowedStatuses = [
             "Submitted",
             "Under Review",
             "Accepted",
             "Rejected"
         ];
 
-        if (
-            !allowedStatuses.includes(status)
-        ) {
-            return res.status(400).json({
-                error:
-                    "Invalid application status"
-            });
-        }
 
         try {
 
@@ -879,11 +869,10 @@ app.put(
                 FROM applications
                 WHERE id = ?
             `).get(applicationId);
-
+console.log("APPLICATION FOUND:",application);
             if (!application) {
                 return res.status(404).json({
-                    error:
-                        "Application not found"
+                    error: "Application not found"
                 });
             }
 
@@ -896,17 +885,11 @@ app.put(
                 applicationId
             );
 
-            console.log(
-                `APPLICATION ${applicationId} STATUS UPDATED: ${status}`
-            );
-
-            res.json({
+            return res.json({
                 message:
                     "Application status updated successfully!",
-                applicationId:
-                    applicationId,
-                status:
-                    status
+                applicationId: applicationId,
+                status: status
             });
 
         } catch (error) {
@@ -916,10 +899,11 @@ app.put(
                 error
             );
 
-            res.status(500).json({
-                error: error.message
+            return res.status(500).json({
+                error:
+                    "Could not update application status: " +
+                    error.message
             });
-
         }
     }
 );
@@ -955,18 +939,55 @@ app.get(
             res.status(500).json({
                 error: error.message
             });
-
         }
-
     }
 );
+
 
 // ==========================================
 // START SERVER
 // ==========================================
+// ==========================================
+// GET APPLICATION STATUS
+// ==========================================
 
+app.patch("/applications/:applicationId/status", (req, res) => {
+
+    const applicationId = Number(req.params.applicationId);
+
+    try {
+
+        const application = db.prepare(`
+            SELECT
+                id AS applicationId,
+                status
+            FROM applications
+            WHERE id = ?
+        `).get(applicationId);
+        console.log("APPLICATION FOUND:",application);
+
+        if (!application) {
+            return res.status(404).json({
+                error: "Application not found"
+            });
+        }
+             return
+        res.json(application);
+
+    } catch (error) {
+
+        console.error(
+            "GET APPLICATION STATUS ERROR:",
+            error
+        );
+          return
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+console.log("STATUS ROUTE LOADED");
 const PORT = 5000;
-
 app.listen(PORT, () => {
 
     console.log(
